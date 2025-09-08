@@ -1,0 +1,455 @@
+$dark-grey: #e2e2e2; // Slightly darker grey
+$text-navy: #0b2545;   // Navy blue
+
+.home-hero {
+  background-color: $dark-grey;
+  min-height: 100vh; // Full viewport height
+  display: flex;
+  align-items: center; // Vertically center content
+
+  .row {
+    align-items: center;
+  }
+
+  h1 {
+    color: $text-navy;
+    line-height: 1.3;
+  }
+
+  p {
+    color: darken($text-navy, 20%);
+    font-size: 1.1rem;
+  }
+
+  .btn-navy {
+    background-color: $text-navy;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 0.3rem;
+    &:hover {
+      background-color: darken($text-navy, 10%);
+    }
+  }
+
+  .btn-outline-navy {
+    border: 2px solid $text-navy;
+    color: $text-navy;
+    font-weight: 600;
+    border-radius: 0.3rem;
+    &:hover {
+      background-color: $text-navy;
+      color: #fff;
+    }
+  }
+
+  /* Right side image */
+  .col-lg-6 img {
+    max-height: 80vh; /* Image height adjust for full screen */
+    width: auto;
+    object-fit: contain;
+  }
+}
+
+// 2nd div
+
+.trusted-companies {
+  background-color: #ffffff;
+
+  .logo-marquee {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+
+    .logo-track {
+      display: flex;
+      width: max-content; // ensure all logos in single line
+      animation: scrollLeft 30s linear infinite; // slower, smooth scroll
+    }
+
+    .company-logo {
+      max-height: 60px;
+      transition: transform 0.3s;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .view-all-link {
+    font-weight: 600;
+    color: #0b2545;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// Keyframes for smooth left scroll
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); // scroll half width (because of duplicate logos)
+  }
+}
+
+
+// 3rd div 
+
+$dark-grey: #e2e2e2; // Same as hero section
+$text-navy: #0b2545;
+
+.facts-section {
+  background-color: $dark-grey;
+
+  h2 {
+    color: $text-navy;
+  }
+
+  .fact-card {
+    background-color: transparent; // Initially no box
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+
+    h3 {
+      color: $text-navy;
+      font-size: 1.25rem;
+    }
+
+    p {
+      color: darken($text-navy, 20%);
+      font-size: 1rem;
+    }
+
+    &:hover {
+      background-color: #fff; // Box appears on hover
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      transform: translateY(-5px);
+    }
+  }
+}
+
+// 4th div 
+
+.dark-card {
+  background-color: #e2e2e2; 
+  color: #0b2545; 
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  .card-header {
+    font-weight: 600;
+    background-color: transparent;
+    border-bottom: none;
+  }
+
+  .card-body {
+    flex: 1 0 auto;
+  }
+
+  ul.list-unstyled {
+    margin-top: auto;
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  img {
+    border-radius: 0.5rem;
+  }
+
+  .video-frame {
+    border: 4px solid #000;
+    border-radius: 0.5rem;
+  }
+}
+
+.automation-section h2.text-primary {
+  color: #0b2545; 
+}
+
+/* Stretch all cards in a row to same height */
+.row.align-items-stretch > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}
+
+.row.align-items-stretch > [class*='col-'] > .dark-card {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+// 5th div 
+
+.div5-section {
+  background-color: #e2e2e2; // Same as 1st div
+  h2 {
+    color: #000;
+    span.text-blue {
+      color: #0b2545; // Navy blue
+    }
+  }
+
+  .image-container {
+    width: 100%;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: auto; 
+      object-fit: cover; // ensure full width display without stretching
+    }
+  }
+}
+
+// 6th div 
+.div6-section {
+  background-color: #0b2545; // Dark navy blue
+  h3 {
+    font-weight: 700;
+  }
+  h4 {
+    font-size: 1.25rem;
+  }
+  button {
+    border-radius: 30px;
+    transition: 0.3s;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+// 7th div 
+.div7-section {
+  background-color: #ffffff;
+
+  h2 {
+    font-size: 1.8rem;
+    color: #000;
+    span {
+      color: #0b2545; // navy blue
+    }
+  }
+
+  p {
+    font-size: 1rem;
+    color: #333;
+  }
+
+  .features-list {
+    list-style: none;
+    padding-left: 0;
+
+    li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 12px;
+      font-size: 1rem;
+      color: #444;
+
+      &::before {
+        content: "✔";
+        position: absolute;
+        left: 0;
+        color: #0b2545;
+        font-weight: bold;
+      }
+    }
+  }
+
+  img {
+    max-height: 350px;
+    object-fit: cover;
+  }
+}
+
+// 8th div 
+
+.div8-section {
+  background-color: #ffffff;
+
+  .custom-card {
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 720px; // 🔥 এখন 1.5x লম্বা
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    h4 {
+      font-size: 1.3rem;
+    }
+
+    .card-image {
+      max-height: 260px; // image একটু বড় হতে পারবে
+      object-fit: contain;
+      margin-top: auto;
+    }
+  }
+
+  .bg-light-green {
+    background-color: #d6f5d6;
+  }
+
+  .bg-light-yellow {
+    background-color: #fff5cc;
+  }
+
+  button {
+    border-radius: 30px;
+    padding: 10px 24px;
+    transition: 0.3s;
+    &:hover {
+      background-color: #0b2545;
+      color: #fff;
+    }
+  }
+}
+
+// div 9 
+.div9-section {
+  background: linear-gradient(135deg, #f8faff, #e9f0ff); // same as div 1
+  padding: 80px 0;
+
+  .headline-text {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #000; // black text
+  }
+
+  .full-width-img {
+    width: 100%;
+    max-height: 600px; 
+    object-fit: contain;
+  }
+}
+
+// div 10
+.div10-section {
+  background: #fff;
+
+  .demo-icon {
+    max-width: 100px;
+  }
+
+  .headline {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #000;
+  }
+
+  .description {
+    font-size: 1rem;
+    color: #444;
+  }
+
+  .brand-text {
+    color: #007bff; // blue for GarmentsSys
+    font-weight: 600;
+  }
+
+  .btn {
+    background: #007bff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+
+    &:hover {
+      background: #0056b3;
+    }
+  }
+
+  .right-image {
+    max-width: 350px;
+  }
+}
+// div 11
+.div11-section {
+  background: linear-gradient(135deg, #001f3f 0%, #004080 100%);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+
+  /* Decorative Overlay */
+  &::before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -80px;
+    left: -80px;
+    width: 250px;
+    height: 250px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+  }
+
+  .heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .subtext {
+    font-size: 1.1rem;
+    color: #ddd;
+  }
+
+  .brand-text {
+    color: #00d4ff;
+    font-weight: 600;
+  }
+
+  .contact-btn {
+    background: #00d4ff;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: #00aacc;
+      transform: scale(1.05);
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

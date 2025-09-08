@@ -1,0 +1,51 @@
+$dark-grey: #e2e2e2; // Slightly darker grey
+$text-navy: #0b2545;   // Navy blue
+
+.home-hero {
+  background-color: $dark-grey;
+  min-height: 100vh; // Full viewport height
+  display: flex;
+  align-items: center; // Vertically center content
+
+  .row {
+    align-items: center;
+  }
+
+  h1 {
+    color: $text-navy;
+    line-height: 1.3;
+  }
+
+  p {
+    color: darken($text-navy, 20%);
+    font-size: 1.1rem;
+  }
+
+  .btn-navy {
+    background-color: $text-navy;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 0.3rem;
+    &:hover {
+      background-color: darken($text-navy, 10%);
+    }
+  }
+
+  .btn-outline-navy {
+    border: 2px solid $text-navy;
+    color: $text-navy;
+    font-weight: 600;
+    border-radius: 0.3rem;
+    &:hover {
+      background-color: $text-navy;
+      color: #fff;
+    }
+  }
+
+  /* Right side image */
+  .col-lg-6 img {
+    max-height: 80vh; /* Image height adjust for full screen */
+    width: auto;
+    object-fit: contain;
+  }
+}

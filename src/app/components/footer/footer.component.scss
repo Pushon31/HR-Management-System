@@ -1,0 +1,82 @@
+.site-footer {
+  background-color: #fff;
+  color: #555;
+  font-size: 0.95rem;
+
+  .footer-links {
+    a {
+      color: #0b2545;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #007bff;
+      }
+    }
+  }
+
+  .social-icons {
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #0b2545;
+      color: #fff;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: #007bff;
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .footer-copy {
+    font-size: 0.85rem;
+    margin-top: 10px;
+
+    .brand-text {
+      font-weight: 600;
+      color: #0b2545;
+    }
+  }
+}
+
+/* WhatsApp Chat Buttons */
+.whatsapp-btn {
+  position: fixed;
+  bottom: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  background-color: #25D366;
+
+  img {
+    width: 35px;
+    height: 35px;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.left-btn {
+  left: 20px;
+}
+
+.right-btn {
+  right: 20px;
+}

@@ -1,0 +1,108 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
+  <div class="container">
+    <!-- Logo -->
+    <a class="navbar-brand text-navy fw-bold" href="#">GarmentsSys</a>
+
+    <!-- Toggler -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link text-navy fw-semibold" routerLink="/home" routerLinkActive="active">Home</a>
+        </li>
+
+        <!-- Features Dropdown -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle text-navy fw-semibold"
+            href="#"
+            id="featuresDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Features
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="featuresDropdown">
+            <li><a class="dropdown-item" href="#">Attendance Tracking</a></li>
+            <li><a class="dropdown-item" href="#">Salary Calculation</a></li>
+            <li><a class="dropdown-item" href="#">Payslip Generation</a></li>
+          </ul>
+        </li>
+
+        <!-- About Dropdown -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle text-navy fw-semibold"
+            href="#"
+            id="aboutDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            About
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+            <li><a class="dropdown-item" href="#">Our Mission</a></li>
+            <li><a class="dropdown-item" href="#">Team</a></li>
+          </ul>
+        </li>
+
+        <!-- Contact Dropdown -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle text-navy fw-semibold"
+            href="#"
+            id="contactDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Contact
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="contactDropdown">
+            <li><a class="dropdown-item" href="#">Email</a></li>
+            <li><a class="dropdown-item" href="#">Phone</a></li>
+          </ul>
+        </li>
+
+        <!-- Services Dropdown -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle text-navy fw-semibold"
+            href="#"
+            id="servicesDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Services
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+            <li><a class="dropdown-item" href="#">Consulting</a></li>
+            <li><a class="dropdown-item" href="#">Support</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- Right side buttons -->
+      <div class="d-flex align-items-center">
+        <a routerLink="/login" class="btn btn-outline-navy me-2">Login</a>
+        <a routerLink="/signup" class="btn btn-navy me-2">Sign Up</a>
+        <a routerLink="/pricing" class="btn btn-outline-navy">See Pricing</a>
+      </div>
+    </div>
+  </div>
+</nav>
