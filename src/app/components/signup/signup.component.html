@@ -1,0 +1,37 @@
+<!-- signup.component.html -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg" style="background-color: #1a1a2e; color: #ffffff;">
+        <div class="card-body p-4">
+          <h3 class="card-title text-center mb-4" style="color: #00bfff;">Sign Up</h3>
+          <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="name" class="form-label">Full Name</label>
+              <input type="text" id="name" formControlName="name" class="form-control" placeholder="Enter your full name">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter your email">
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" id="password" formControlName="password" class="form-control" placeholder="Enter your password">
+            </div>
+            <div class="mb-3">
+              <label for="role" class="form-label">Role</label>
+              <select id="role" formControlName="role" class="form-select">
+                <option value="employee">Employee</option>
+                <option value="manager">Manager</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
+            <button type="submit" class="btn w-100" style="background-color: #00bfff; color: #1a1a2e;">Sign Up</button>
+          </form>
+          <p class="text-center mt-3">Already have an account? <a routerLink="/login" style="color: #00bfff;">Login</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
