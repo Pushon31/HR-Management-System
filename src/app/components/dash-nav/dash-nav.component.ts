@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dash-nav',
@@ -7,14 +6,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./dash-nav.component.scss']
 })
 export class DashNavComponent {
-  @Input() role: string = 'employee'; // employee, manager, admin
+  @Input() role: string = 'Employee';  // <-- Input property
+  username = 'John Doe';               // dummy data
 
-  constructor(private router: Router) {}
+  isSidebarOpen = false;
 
-  logout() {
-    // এখানে logout logic দিবে পরে
-    console.log('Logging out...');
-    this.router.navigate(['/login']);
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+    const content = document.querySelector('.main-content');
+    if (this.isSidebarOpen) {
+      content?.classList.add('shifted');
+    } else {
+      content?.classList.remove('shifted');
+    }
   }
 
+  logout() {
+    console.log('User logged out!');
+  }
 }

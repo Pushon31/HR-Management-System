@@ -1,0 +1,14 @@
+/* Sidebar custom width */
+.custom-offcanvas {
+  width: 250px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Push effect for content */
+.main-content {
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.main-content.shifted {
+  margin-left: 250px;
+}

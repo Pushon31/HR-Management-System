@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-dashboard.component.scss']
 })
 export class AdminDashboardComponent {
+  today: Date = new Date();
   cards = [
     { title: 'Users', icon: 'fas fa-users', color: '#4e73df' },
     { title: 'Attendance', icon: 'fas fa-calendar-check', color: '#1cc88a' },
