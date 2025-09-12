@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./emp-dashboard.component.scss']
 })
 export class EmpDashboardComponent implements OnInit {
+  today: Date = new Date();
 
    cards = [
     { title: 'Profile', icon: 'fas fa-user', color: '#4e73df' },

@@ -6,3 +6,39 @@
     transform: translateY(-5px);
   }
 }
+.card.flex-column {
+  height: 100%;
+}
+
+#employeeChart {
+  height: 100% !important;
+  max-height: 100%;
+}
+
+// div 3 
+// .summary-card:hover {
+//   transform: translateY(-3px);
+//   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+//   transition: 0.3s;
+// }
+
+// .bg-light-green { background-color: #d4edda !important; }
+// .bg-light-yellow { background-color: #fff3cd !important; }
+// .bg-light-red { background-color: #f8d7da !important; }
+// .bg-light-blue { background-color: #cfe2ff !important; }
+// .bg-light-orange { background-color: #ffe5b4 !important; }
+
+// .calendar-box {
+//   height: 200px;
+//   background-color: #f8f9fa;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// .scheduled-item:hover {
+//   background-color: #f0f8ff;
+//   transition: 0.3s;
+// }
+
+

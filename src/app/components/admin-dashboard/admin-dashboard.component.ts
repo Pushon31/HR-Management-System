@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
+import { Chart } from 'chart.js/auto';
+
 
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.scss']
 })
-export class AdminDashboardComponent {
+export class AdminDashboardComponent implements AfterViewInit {
   today: Date = new Date();
   cards = [
     { title: 'Users', icon: 'fas fa-users', color: '#4e73df' },
@@ -15,5 +17,58 @@ export class AdminDashboardComponent {
     { title: 'Settings', icon: 'fas fa-cogs', color: '#e74a3b' },
     { title: 'Notifications', icon: 'fas fa-bell', color: '#858796' }
   ];
+
+
+
+
+
+    // For html part div : 2 ...dummy data show 
+
+   ngAfterViewInit() {
+    const ctx = document.getElementById('employeeChart') as HTMLCanvasElement;
+
+    new Chart(ctx, {
+      type: 'bar', // চাইলে pie/line এ পরিবর্তন করা যাবে
+      data: {
+        labels: ['HR', 'IT', 'Finance', 'Marketing', 'Sales'],
+        datasets: [{
+          label: 'Number of Employees',
+          data: [120, 300, 150, 200, 180], // 👉 demo data
+          backgroundColor: [
+            '#4caf50',  // green
+            '#2196f3',  // blue
+            '#ff9800',  // orange
+            '#f44336',  // red
+            '#9c27b0'   // purple
+          ],
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              stepSize: 50
+            }
+          }
+        }
+      }
+    });
+  }
+
+  applicants = [
+  { name: 'John Doe', post: 'Developer', status: 'Pending', profilePic: 'https://i.pravatar.cc/150?img=1' },
+  { name: 'Jane Smith', post: 'Designer', status: 'Approved', profilePic: 'https://i.pravatar.cc/150?img=2' },
+  { name: 'Michael Brown', post: 'Manager', status: 'Rejected', profilePic: 'https://i.pravatar.cc/150?img=3' },
+  { name: 'Emily Johnson', post: 'HR', status: 'Pending', profilePic: 'https://i.pravatar.cc/150?img=4' },
+  { name: 'David Wilson', post: 'Marketing', status: 'Approved', profilePic: 'https://i.pravatar.cc/150?img=5' }
+];
   
 }

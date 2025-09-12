@@ -1,5 +1,6 @@
 <app-dash-nav  [role]="'Employee'"></app-dash-nav>
-<div class="container mt-4">
+<router-outlet></router-outlet>
+<!-- <div class="container mt-4">
   <h3 class="mb-4">Employee Dashboard</h3>
   <div class="row">
     <div class="col-md-4 mb-4" *ngFor="let card of cards">
@@ -11,4 +12,180 @@
       </div>
     </div>
   </div>
+</div> -->
+
+<!-- Top Welcome Section -->
+<div class="container-fluid bg-white shadow-sm p-3 rounded mb-4 d-flex justify-content-between align-items-center">
+  <div>
+    <h5 class="fw-bold text-dark mb-1">Welcome, Employee</h5>
+    <p class="text-muted small mb-0">{{ today | date: 'fullDate' }}</p>
+  </div>
+  <button class="btn btn-sm btn-primary">Edit Profile</button>
 </div>
+
+<!-- Quick Stats -->
+<div class="container-fluid px-2 mb-4">
+  <div class="row g-3">
+    <!-- Attendance -->
+    <div class="col-6 col-md-3">
+      <div class="card text-center p-3 shadow-sm h-100" style="background:#4caf50; color:white; border-radius:12px;">
+        <i class="fas fa-calendar-check fa-lg mb-2"></i>
+        <h6 class="fw-bold mb-1">Attendance</h6>
+        <small>Present: 25/30</small>
+      </div>
+    </div>
+
+    <!-- Projects -->
+    <div class="col-6 col-md-3">
+      <div class="card text-center p-3 shadow-sm h-100" style="background:#2196f3; color:white; border-radius:12px;">
+        <i class="fas fa-briefcase fa-lg mb-2"></i>
+        <h6 class="fw-bold mb-1">Projects</h6>
+        <small>3 Active</small>
+      </div>
+    </div>
+
+    <!-- Salary -->
+    <div class="col-6 col-md-3">
+      <div class="card text-center p-3 shadow-sm h-100" style="background:#ff9800; color:white; border-radius:12px;">
+        <i class="fas fa-coins fa-lg mb-2"></i>
+        <h6 class="fw-bold mb-1">Salary</h6>
+        <small>This Month Paid</small>
+      </div>
+    </div>
+
+    <!-- Leaves -->
+    <div class="col-6 col-md-3">
+      <div class="card text-center p-3 shadow-sm h-100" style="background:#f44336; color:white; border-radius:12px;">
+        <i class="fas fa-user-clock fa-lg mb-2"></i>
+        <h6 class="fw-bold mb-1">Leaves</h6>
+        <small>2 Pending</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Announcements -->
+  <div class="row g-3 mt-2">
+    <div class="col-12">
+      <div class="card text-center p-4 shadow-sm h-100" style="border-radius:12px;">
+        <img src="https://gxon.layoutdrop.com/demo/assets/images/media/svg/media1.svg" 
+             class="mb-2" width="50">
+        <h6 class="fw-bold">Announcements</h6>
+        <p class="small text-muted">Check latest updates from Admin</p>
+        <button class="btn btn-sm btn-primary">View</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Middle Section: Charts + Tasks -->
+<div class="row g-3">
+  <!-- Performance Chart -->
+  <div class="col-12 col-lg-6">
+    <div class="card p-3 shadow-sm rounded h-100">
+      <div class="d-flex justify-content-between mb-2">
+        <h6 class="fw-bold mb-0">Performance</h6>
+        <button class="btn btn-outline-primary btn-sm">Download</button>
+      </div>
+      <canvas id="performanceChart" style="height:220px;"></canvas>
+    </div>
+  </div>
+
+  <!-- Task Updates -->
+  <div class="col-12 col-lg-6">
+    <div class="card p-3 shadow-sm rounded h-100">
+      <div class="d-flex justify-content-between mb-2">
+        <h6 class="fw-bold mb-0">My Tasks</h6>
+        <button class="btn btn-sm btn-primary">New Task</button>
+      </div>
+      <div class="task-item d-flex align-items-center mb-2 p-2 bg-light rounded">
+        <input type="checkbox" class="form-check-input me-2">
+        <div class="flex-grow-1 small">Complete module testing <span class="text-muted">(Due: Today)</span></div>
+        <i class="bi bi-trash text-danger"></i>
+      </div>
+      <div class="task-item d-flex align-items-center mb-2 p-2 bg-light rounded">
+        <input type="checkbox" class="form-check-input me-2">
+        <div class="flex-grow-1 small">Update documentation <span class="text-muted">(Due: Tomorrow)</span></div>
+        <i class="bi bi-trash text-danger"></i>
+      </div>
+      <div class="task-item d-flex align-items-center p-2 bg-light rounded">
+        <input type="checkbox" class="form-check-input me-2">
+        <div class="flex-grow-1 small">Attend standup meeting <span class="text-muted">(10:00 AM)</span></div>
+        <i class="bi bi-trash text-danger"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Schedule + Leaves -->
+<div class="row g-3 mt-2">
+  <!-- Schedule -->
+  <div class="col-12 col-lg-4">
+    <div class="card p-3 shadow-sm rounded h-100">
+      <div class="d-flex justify-content-between mb-2">
+        <h6 class="fw-bold mb-0">My Schedule</h6>
+        <button class="btn btn-sm btn-outline-primary">Add</button>
+      </div>
+      <div class="small text-center bg-light p-3 rounded">Calendar Placeholder</div>
+      <div class="mt-2">
+        <div class="d-flex justify-content-between bg-light rounded p-2 mb-1">
+          <span>Project Meeting</span><span>11:00 AM</span>
+        </div>
+        <div class="d-flex justify-content-between bg-light rounded p-2 mb-1">
+          <span>Client Call</span><span>02:00 PM</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leaves -->
+  <div class="col-12 col-lg-8">
+    <div class="card p-3 shadow-sm rounded h-100">
+      <div class="d-flex justify-content-between mb-2">
+        <h6 class="fw-bold mb-0">My Leave Requests</h6>
+        <button class="btn btn-sm btn-primary">Apply</button>
+      </div>
+      <div class="table-responsive" style="max-height: 250px; overflow-y:auto;">
+        <table class="table table-sm mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>Date</th>
+              <th>Days</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>12 Sep 2025</td>
+              <td>2</td>
+              <td><span class="badge bg-success">Approved</span></td>
+            </tr>
+            <tr>
+              <td>18 Sep 2025</td>
+              <td>1</td>
+              <td><span class="badge bg-warning">Pending</span></td>
+            </tr>
+            <tr>
+              <td>22 Sep 2025</td>
+              <td>3</td>
+              <td><span class="badge bg-danger">Rejected</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.quick-card {
+  border-radius: 12px;
+  transition: transform 0.2s;
+}
+.quick-card:hover {
+  transform: translateY(-3px);
+}
+.task-item:hover {
+  background: #e9f7ef;
+}
+</style>
+
