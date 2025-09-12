@@ -1,14 +1,17 @@
-/* Sidebar custom width */
-.custom-offcanvas {
-  width: 250px;
-  transition: all 0.3s ease-in-out;
+/* Sidebar Dropdown Items */
+.offcanvas-body .accordion-body a {
+  color: #000 !important;        /* সবসময় কালো */
+  text-decoration: none;
+  padding: 6px 0;
+  display: block;
+  transition: color 0.2s ease-in-out;
 }
 
-/* Push effect for content */
-.main-content {
-  transition: margin-left 0.3s ease-in-out;
+.offcanvas-body .accordion-body a:hover {
+  color: #0d6efd !important;     /* hover করলে নীল */
 }
 
-.main-content.shifted {
-  margin-left: 250px;
+.offcanvas-body .accordion-body a.active {
+  color: #0d6efd !important;     /* active হলে নীল থেকে যাবে */
+  font-weight: 600;
 }

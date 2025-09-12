@@ -13,6 +13,16 @@ import { EmpDashboardComponent } from './components/emp-dashboard/emp-dashboard.
 import { DashNavComponent } from './components/dash-nav/dash-nav.component';
 import { ManDashboardComponent } from './components/man-dashboard/man-dashboard.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { EmployeeComponent } from './components/employee/employee.component';
+import { AttendanceComponent } from './components/attendance/attendance.component';
+import { LeaveComponent } from './components/leave/leave.component';
+import { PayrollComponent } from './components/payroll/payroll.component';
+import { RecruitmentComponent } from './components/recruitment/recruitment.component';
+import { TaskManagementComponent } from './components/task-management/task-management.component';
+import { AnalyticsComponent } from './components/analytics/analytics.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { HelpSupportComponent } from './components/help-support/help-support.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,13 +35,23 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
     EmpDashboardComponent,
     DashNavComponent,
     ManDashboardComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    EmployeeComponent,
+    AttendanceComponent,
+    LeaveComponent,
+    PayrollComponent,
+    RecruitmentComponent,
+    TaskManagementComponent,
+    AnalyticsComponent,
+    CalendarComponent,
+    HelpSupportComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

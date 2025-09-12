@@ -1,0 +1,184 @@
+{
+  "employees": [
+    {
+      "id": "2",
+      "name": "Tamima Monisha",
+      "department": "Quality",
+      "hiredDate": "2021-06-10",
+      "email": "TamimaMonisha@example.com",
+      "phone": "234-567-8901",
+      "status": "On Leave",
+      "profilePic": "https://scontent.fdac138-1.fna.fbcdn.net/v/t39.30808-6/518363824_4063883973855080_5931200836167079310_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=XARl8LzP1JkQ7kNvwFxebSR&_nc_oc=Adk07g5hgFXOanVq7esyJ_u5QBAb717_7vIS4LlnEdnX-Hp-_O_edRGLkghZ2jr-wQU&_nc_zt=23&_nc_ht=scontent.fdac138-1.fna&_nc_gid=FAMiR5sXm9ZAXvJZziHT6w&oh=00_AfYyjiHB_siR6lhlOltaZqKdhmuK3u1C9RvPaPIPd7wzXw&oe=68C9B157"
+    },
+    {
+      "id": "4",
+      "name": "Robiul Hossain",
+      "department": "Sewing",
+      "hiredDate": "2021-03-17",
+      "email": "RobiulHossain@example.com",
+      "phone": "456-789-0123",
+      "status": "Active",
+      "profilePic": "https://scontent.fdac138-2.fna.fbcdn.net/v/t39.30808-6/524608047_1481472763188328_7872727249814979795_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=GbG9Oiy2vDIQ7kNvwF3nqkZ&_nc_oc=Adkgp92yp3a6zNYHr94X7qoeJ59r7zwrgMzssBkW4a5fu17TpofNnXocji9cU6Q_vNg&_nc_zt=23&_nc_ht=scontent.fdac138-2.fna&_nc_gid=OH_2Y03dSEghqDYfq7X3cQ&oh=00_AfbPqwQDwFzm1wDd10tAloseDhMUjHrwQmLLwaWrACT9Hw&oe=68C986CF"
+    },
+    {
+      "id": "5",
+      "name": "Latif Hossain",
+      "department": "Packing",
+      "hiredDate": "2022-11-05",
+      "email": "LatifHossain@example.com",
+      "phone": "567-890-1234",
+      "status": "On Leave",
+      "profilePic": "https://scontent.fdac138-1.fna.fbcdn.net/v/t39.30808-6/475051416_3957619784518167_1668362488194516687_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=J6hynJdu5RcQ7kNvwF4wQgs&_nc_oc=AdnZOqOBkisQHtukxKH9lPvP5pGbCxzfDrQYdEYkIWCG5WkjruQAPZzb2V-nZ3yQZX8&_nc_zt=23&_nc_ht=scontent.fdac138-1.fna&_nc_gid=kt5CDeqtVfLVdUtOgOBNyw&oh=00_AfaV7KSCHd02jLsVRzh-q_XG2aQ0obFMfnhTxJElC6BQfQ&oe=68C97B7C"
+    },
+    {
+      "id": "6",
+      "name": "Fahim Hossain",
+      "department": "HR",
+      "hiredDate": "2023-01-20",
+      "email": "FahimHossain@example.com",
+      "phone": "678-901-2345",
+      "status": "Active",
+      "profilePic": "https://scontent.fdac138-2.fna.fbcdn.net/v/t39.30808-6/470215275_1776512056432142_3212373098302148050_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=ebxu8XwUzvkQ7kNvwHRfhhD&_nc_oc=AdmlQuhQYvEjJCYFPGs_CfX8GFOeud201wmQBEuuWNRgp0wwGj5T0zFsEfysQe8kyoM&_nc_zt=23&_nc_ht=scontent.fdac138-2.fna&_nc_gid=YMil84J16tFPaAPWcCL1sQ&oh=00_Afal4i4nhBs86vm0_P16CqpBoQDxiFgvFM8Go6KsK2J18Q&oe=68C981A9"
+    },
+    {
+      "id": "7",
+      "name": "Pabon Rahman",
+      "department": "Sewing",
+      "hiredDate": "2022-07-12",
+      "email": "PabonRahman@example.com",
+      "phone": "789-012-3456",
+      "status": "Active",
+      "profilePic": "https://i.pravatar.cc/150?img=7"
+    },
+    {
+      "id": "8",
+      "name": "Hafiz AL Asad",
+      "department": "IT",
+      "hiredDate": "2021-12-08",
+      "email": "Hafiz AL Asad@example.com",
+      "phone": "890-123-4567",
+      "status": "On Leave",
+      "profilePic": "https://scontent.fdac138-1.fna.fbcdn.net/v/t39.30808-6/469828281_3893802384189718_7534685010729795710_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=m0cpGNPVaXwQ7kNvwGyURUd&_nc_oc=AdnHPefdPdhgrM9w5aIBypVw-Te-bU9uw0gd7ppdoXhygHUM3fRsyD7osUHELFLqIyY&_nc_zt=23&_nc_ht=scontent.fdac138-1.fna&_nc_gid=DU_KdIG9f13YROQaJEtQWw&oh=00_Afag5o3o2jB0QTt9Z8jqV3CZaWI8kxXdyhmOjnYbHZc_bw&oe=68C994AD"
+    },
+    {
+      "id": "9",
+      "name": "Rakib Mridha",
+      "department": "Marketing",
+      "hiredDate": "2020-05-22",
+      "email": "Rakib Mridha@example.com",
+      "phone": "901-234-5678",
+      "status": "Active",
+      "profilePic": "https://scontent.fdac138-1.fna.fbcdn.net/v/t39.30808-6/544817110_2278918012588912_7365576600227081918_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=hAKvpSJKB2IQ7kNvwHfWnJV&_nc_oc=Adkbu_5zfCEiF-oSc56DfxSIRStIZaM-57hrVKlDHc7lRpUJ8oWTsbbsYzuDMYqNVcM&_nc_zt=23&_nc_ht=scontent.fdac138-1.fna&_nc_gid=-P-6kwC8zZ2n2oaNjtlZ7w&oh=00_AfZ4b6GInrXnKrb57sodU1_n2mV9qMlz0rC8vtr1OFXcTA&oe=68C99C15"
+    },
+    {
+      "id": "10",
+      "name": "Isabella Thomas",
+      "department": "Sales",
+      "hiredDate": "2022-09-30",
+      "email": "isabella.thomas@example.com",
+      "phone": "012-345-6789",
+      "status": "Active",
+      "profilePic": "https://i.pravatar.cc/150?img=10"
+    },
+    {
+      "id": "11",
+      "name": "William Harris",
+      "department": "HR",
+      "hiredDate": "2023-02-11",
+      "email": "william.harris@example.com",
+      "phone": "123-456-7891",
+      "status": "On Leave",
+      "profilePic": "https://i.pravatar.cc/150?img=11"
+    },
+    {
+      "id": "12",
+      "name": "Mia Clark",
+      "department": "Finance",
+      "hiredDate": "2021-08-19",
+      "email": "mia.clark@example.com",
+      "phone": "234-567-8902",
+      "status": "Active",
+      "profilePic": "https://i.pravatar.cc/150?img=12"
+    },
+    {
+      "id": "13",
+      "name": "Alexander Lewis",
+      "department": "IT",
+      "hiredDate": "2020-10-14",
+      "email": "alex.lewis@example.com",
+      "phone": "345-678-9013",
+      "status": "Active",
+      "profilePic": "https://i.pravatar.cc/150?img=13"
+    },
+    {
+      "id": "14",
+      "name": "Charlotte Walker",
+      "department": "Marketing",
+      "hiredDate": "2021-04-25",
+      "email": "charlotte.walker@example.com",
+      "phone": "456-789-0124",
+      "status": "On Leave",
+      "profilePic": "https://i.pravatar.cc/150?img=14"
+    },
+    {
+      "id": "15",
+      "name": "Henry Hall",
+      "department": "Sales",
+      "hiredDate": "2022-06-07",
+      "email": "henry.hall@example.com",
+      "phone": "567-890-1235",
+      "status": "Active",
+      "profilePic": "https://i.pravatar.cc/150?img=15"
+    },
+    {
+      "id": "16",
+      "name": "Syed Noor E Sams",
+      "department": "HR",
+      "hiredDate": "2023-03-21",
+      "email": "amelia.allen@example.com",
+      "phone": "01319930527",
+      "status": "Active",
+      "profilePic": "https://scontent.fdac138-1.fna.fbcdn.net/v/t39.30808-1/445203346_487096160315671_769041845936877262_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=109&ccb=1-7&_nc_sid=1d2534&_nc_ohc=u4-BD7OWyn0Q7kNvwHaBGIu&_nc_oc=AdnUnBRhvXjqGmQr30dBikBXtgiIc-tOyLa8n1L1tNHJ3b7q_w2-HcQeiHyeJCBRX60&_nc_zt=24&_nc_ht=scontent.fdac138-1.fna&_nc_gid=3bzIGxDYy5XQHoFi89gBCg&oh=00_AfaoYm10m0BeotcuCApwC3V9iuqP1ECDRe7Q0FCjSP-Emg&oe=68C98FBA"
+    },
+    {
+      "id": "17",
+      "name": "Benjamin Young",
+      "department": "Finance",
+      "hiredDate": "2022-10-02",
+      "email": "benjamin.young@example.com",
+      "phone": "789-012-3457",
+      "status": "On Leave",
+      "profilePic": "https://i.pravatar.cc/150?img=17"
+    },
+    {
+      "id": "18",
+      "name": "Evelyn King",
+      "department": "IT",
+      "hiredDate": "2021-11-16",
+      "email": "evelyn.king@example.com",
+      "phone": "890-123-4568",
+      "status": "Active",
+      "profilePic": "https://i.pravatar.cc/150?img=18"
+    },
+    {
+      "id": "19",
+      "name": "Lucas Wright",
+      "department": "Marketing",
+      "hiredDate": "2020-08-09",
+      "email": "lucas.wright@example.com",
+      "phone": "901-234-5679",
+      "status": "Active",
+      "profilePic": "https://i.pravatar.cc/150?img=19"
+    },
+    {
+      "id": 0,
+      "name": "Syed Noor E Sams",
+      "department": "IT",
+      "hiredDate": "",
+      "email": "syednooresams@gmail.com",
+      "phone": "01319930527",
+      "status": "Active",
+      "profilePic": ""
+    }
+  ]
+}

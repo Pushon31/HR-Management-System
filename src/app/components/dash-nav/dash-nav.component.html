@@ -1,7 +1,12 @@
 <!-- Top Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom px-3">
   <!-- Sidebar Toggle -->
-  <button class="btn btn-outline-secondary me-3" (click)="toggleSidebar()" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
+  <button
+    class="btn btn-outline-secondary me-3"
+    (click)="toggleSidebar()"
+    data-bs-toggle="offcanvas"
+    data-bs-target="#sidebarMenu"
+  >
     <i class="fas fa-bars"></i>
   </button>
 
@@ -29,35 +34,68 @@
 
     <!-- Profile -->
     <div class="dropdown">
-      <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown">
-        <img src="https://i.pravatar.cc/40" alt="profile" class="rounded-circle me-2" />
+      <a
+        href="#"
+        class="d-flex align-items-center text-decoration-none dropdown-toggle"
+        id="profileDropdown"
+        data-bs-toggle="dropdown"
+      >
+        <img
+          src="https://i.pravatar.cc/40"
+          alt="profile"
+          class="rounded-circle me-2"
+        />
         <div>
-          <div class="fw-bold">{{username}}</div>
-          <small class="text-muted">{{role}}</small>
+          <div class="fw-bold">{{ username }}</div>
+          <small class="text-muted">{{ role }}</small>
         </div>
       </a>
       <ul class="dropdown-menu dropdown-menu-end shadow">
         <li><a class="dropdown-item" href="#">Profile</a></li>
         <li><a class="dropdown-item" href="#">Settings</a></li>
         <li><hr class="dropdown-divider" /></li>
-        <li><a class="dropdown-item text-danger" (click)="logout()">Logout</a></li>
+        <li>
+          <a class="dropdown-item text-danger" (click)="logout()">Logout</a>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
 
 <!-- Offcanvas Sidebar -->
-<div class="offcanvas offcanvas-start custom-offcanvas" tabindex="-1" id="sidebarMenu">
+<div
+  class="offcanvas offcanvas-start custom-offcanvas"
+  tabindex="-1"
+  id="sidebarMenu"
+>
   <div class="offcanvas-header border-bottom">
     <h5 class="offcanvas-title">
+      <!-- Dashboard Switcher -->
       <div class="dropdown">
-        <button class="btn btn-light dropdown-toggle" type="button" id="dashboardDropdown" data-bs-toggle="dropdown">
-          Employee Dashboard
+        <button
+          class="btn btn-light dropdown-toggle"
+          type="button"
+          id="dashboardDropdown"
+          data-bs-toggle="dropdown"
+        >
+          {{ role }} Dashboard
         </button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" routerLink="/empDashboard">Employee Dashboard</a></li>
-          <li><a class="dropdown-item" routerLink="/manDashboard">Manager Dashboard</a></li>
-          <li><a class="dropdown-item" routerLink="/adminDashboard">Admin Dashboard</a></li>
+          <li>
+            <a class="dropdown-item" routerLink="/empDashboard"
+              >Employee Dashboard</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" routerLink="/manDashboard"
+              >Manager Dashboard</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" routerLink="/admin"
+              >Admin Dashboard</a
+            >
+          </li>
         </ul>
       </div>
     </h5>
@@ -65,17 +103,74 @@
   </div>
 
   <div class="offcanvas-body">
-    <h6 class="text-primary fw-bold mb-3">Apps & Pages</h6>
-
+    <!-- Sidebar Menu -->
     <div class="accordion" id="sidebarAccordion">
-      <!-- Chat -->
+      <!-- Dashboard Dropdown -->
       <div class="accordion-item border-0">
         <h2 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseChat">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseDashboard"
+          >
+            <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+          </button>
+        </h2>
+        <div
+          id="collapseDashboard"
+          class="accordion-collapse collapse"
+          data-bs-parent="#sidebarAccordion"
+        >
+          <div class="accordion-body">
+            <ng-container [ngSwitch]="role">
+              <!-- Admin -->
+              <ng-container *ngSwitchCase="'Admin'">
+                <a routerLink="/admin/employeee" class="d-block">Employee</a>
+                <a routerLink="/admin/attendance" class="d-block">Attendance</a>
+                <a routerLink="/admin/leave" class="d-block">Leave</a>
+                <a routerLink="/admin/payroll" class="d-block">Payroll</a>
+                <a routerLink="/admin/recruitment" class="d-block">Recruitment</a>
+                <a routerLink="/admin/task-management" class="d-block">Task Management</a>
+                <a routerLink="/admin/analytics" class="d-block">Analytics</a>
+              </ng-container>
+
+              <!-- Manager -->
+              <ng-container *ngSwitchCase="'Manager'">
+                <a href="#" class="d-block">Team Overview</a>
+                <a href="#" class="d-block">Projects</a>
+                <a href="#" class="d-block">Review</a>
+              </ng-container>
+
+              <!-- Employee -->
+              <ng-container *ngSwitchDefault>
+                <a href="#" class="d-block">My Profile</a>
+                <a href="#" class="d-block">My Attendance</a>
+                <a href="#" class="d-block">My Leave</a>
+                <a href="#" class="d-block">Tasks</a>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat Dropdown -->
+      <div class="accordion-item border-0">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseChat"
+          >
             <i class="fas fa-comments me-2"></i> Chat
           </button>
         </h2>
-        <div id="collapseChat" class="accordion-collapse collapse" data-bs-parent="#sidebarAccordion">
+        <div
+          id="collapseChat"
+          class="accordion-collapse collapse"
+          data-bs-parent="#sidebarAccordion"
+        >
           <div class="accordion-body">
             <a href="#" class="d-block">New Chat</a>
             <a href="#" class="d-block">History</a>
@@ -83,14 +178,23 @@
         </div>
       </div>
 
-      <!-- Email -->
+      <!-- Email Dropdown -->
       <div class="accordion-item border-0">
         <h2 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEmail">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseEmail"
+          >
             <i class="fas fa-envelope me-2"></i> Email
           </button>
         </h2>
-        <div id="collapseEmail" class="accordion-collapse collapse" data-bs-parent="#sidebarAccordion">
+        <div
+          id="collapseEmail"
+          class="accordion-collapse collapse"
+          data-bs-parent="#sidebarAccordion"
+        >
           <div class="accordion-body">
             <a href="#" class="d-block">Inbox</a>
             <a href="#" class="d-block">Sent</a>
@@ -101,22 +205,20 @@
       <!-- Calendar -->
       <div class="accordion-item border-0">
         <h2 class="accordion-header">
-          <a class="accordion-button collapsed" href="#"><i class="fas fa-calendar-alt me-2"></i> Calendar</a>
+          <a class="accordion-button collapsed" routerLink="/calendar">
+            <i class="fas fa-calendar-alt me-2"></i> Calendar
+          </a>
         </h2>
       </div>
 
       <!-- Help -->
       <div class="accordion-item border-0">
         <h2 class="accordion-header">
-          <a class="accordion-button collapsed" href="#"><i class="fas fa-life-ring me-2"></i> Help & Support</a>
+          <a class="accordion-button collapsed" routerLink="help-support">
+            <i class="fas fa-life-ring me-2"></i> Help & Support
+          </a>
         </h2>
       </div>
     </div>
   </div>
 </div>
-
-<!-- Main Content -->
-<!-- <div class="main-content p-4">
-  <h2>Welcome to {{role | titlecase}} Dashboard</h2>
-  <p>This is your main content area.</p>
-</div> -->

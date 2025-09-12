@@ -15,4 +15,5 @@ export class AdminDashboardComponent {
     { title: 'Settings', icon: 'fas fa-cogs', color: '#e74a3b' },
     { title: 'Notifications', icon: 'fas fa-bell', color: '#858796' }
   ];
+  
 }
