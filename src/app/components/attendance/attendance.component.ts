@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./attendance.component.scss']
 })
 export class AttendanceComponent {
-
+ today: Date = new Date();
 }

@@ -1,10 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-leave',
   templateUrl: './leave.component.html',
   styleUrls: ['./leave.component.scss']
 })
-export class LeaveComponent {
+export class LeaveComponent implements OnInit {
+currentMonth: Date;
 
+  constructor() {
+    
+    this.currentMonth = new Date();
+  }
+  ngOnInit(): void {
+    
+  }
 }

@@ -1,1 +1,147 @@
-<p>payroll works!</p>
+<!-- Payroll Dashboard Container -->
+<div class="container-fluid bg-white p-3 shadow-sm rounded mb-4">
+  <!-- Top Section -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <h5 class="fw-bold text-dark mb-1">Payroll Summary - {{ currentMonth | date: 'MMMM yyyy' }}</h5>
+      <p class="text-muted small mb-0">Total Employees: 150</p>
+    </div>
+    <button class="btn btn-primary btn-sm">Generate Payroll</button>
+  </div>
+
+  <!-- Quick Stats Cards -->
+  <div class="row g-3 mb-3 justify-content-center">
+    <div class="col-6 col-md-3 col-lg-2">
+      <div class="card text-center p-3 shadow-sm payroll-card" style="background-color: #d0f0c0;">
+        <i class="fas fa-coins fa-2x text-success mb-2"></i>
+        <h6 class="fw-bold mb-1">Total Salary</h6>
+        <h5 class="fw-bold text-success">$125,000</h5>
+        <small class="text-muted">This Month</small>
+      </div>
+    </div>
+    <div class="col-6 col-md-3 col-lg-2">
+      <div class="card text-center p-3 shadow-sm payroll-card" style="background-color: #bbdefb;">
+        <i class="fas fa-hand-holding-usd fa-2x text-primary mb-2"></i>
+        <h6 class="fw-bold mb-1">Paid</h6>
+        <h5 class="fw-bold text-primary">$110,000</h5>
+        <small class="text-muted">Completed</small>
+      </div>
+    </div>
+    <div class="col-6 col-md-3 col-lg-2">
+      <div class="card text-center p-3 shadow-sm payroll-card" style="background-color: #fff9c4;">
+        <i class="fas fa-hourglass-half fa-2x text-warning mb-2"></i>
+        <h6 class="fw-bold mb-1">Pending</h6>
+        <h5 class="fw-bold text-warning">$15,000</h5>
+        <small class="text-muted">To be Processed</small>
+      </div>
+    </div>
+    <div class="col-6 col-md-3 col-lg-2">
+      <div class="card text-center p-3 shadow-sm payroll-card" style="background-color: #ffcdd2;">
+        <i class="fas fa-clock fa-2x text-danger mb-2"></i>
+        <h6 class="fw-bold mb-1">Overtime</h6>
+        <h5 class="fw-bold text-danger">45 hrs</h5>
+        <small class="text-muted">This Month</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payroll Table Card -->
+  <div class="card shadow-sm rounded bg-light mb-4">
+    <!-- Header -->
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h6 class="mb-0">Employee Payroll</h6>
+      <div class="d-flex gap-2 align-items-center">
+        <input type="text" class="form-control form-control-sm" placeholder="Search Employee">
+        <select class="form-select form-select-sm">
+          <option>2025</option>
+          <option>2024</option>
+          <option>2023</option>
+        </select>
+        <button class="btn btn-outline-primary btn-sm">Download</button>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+      <table class="table table-bordered mb-0 align-middle text-center">
+        <thead class="bg-light">
+          <tr>
+            <th>Employee</th>
+            <th>Basic</th>
+            <th>Allowance</th>
+            <th>Deductions</th>
+            <th>Overtime</th>
+            <th>Net Pay</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let emp of [].constructor(10); let i=index">
+            <td class="text-start">
+              <img src="https://i.pravatar.cc/30?img={{i+1}}" class="rounded-circle me-2" width="30" height="30">
+              Employee {{ i + 1 }}
+            </td>
+            <td>$1000</td>
+            <td>$200</td>
+            <td>$50</td>
+            <td>5 hrs</td>
+            <td>$1150</td>
+            <td>
+              <span class="badge bg-success">Paid</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- Pagination -->
+      <div class="d-flex justify-content-between align-items-center p-2 border-top w-100">
+        <button class="btn btn-outline-primary btn-sm">Previous</button>
+        <span>Page 1 of 5</span>
+        <button class="btn btn-outline-primary btn-sm">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Footer Cards -->
+<div class="row g-3">
+  <div class="col-6 col-md-3">
+    <div class="card p-3 shadow-sm text-center" style="background-color: #d0f0c0;">
+      <i class="fas fa-users fa-2x text-success mb-2"></i>
+      <h6>Total Employees</h6>
+      <h5>150</h5>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="card p-3 shadow-sm text-center" style="background-color: #bbdefb;">
+      <i class="fas fa-hand-holding-usd fa-2x text-primary mb-2"></i>
+      <h6>Total Paid</h6>
+      <h5>$110,000</h5>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="card p-3 shadow-sm text-center" style="background-color: #fff9c4;">
+      <i class="fas fa-hourglass-half fa-2x text-warning mb-2"></i>
+      <h6>Total Pending</h6>
+      <h5>$15,000</h5>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="card p-3 shadow-sm text-center" style="background-color: #ffcdd2;">
+      <i class="fas fa-clock fa-2x text-danger mb-2"></i>
+      <h6>Total Overtime</h6>
+      <h5>45 hrs</h5>
+    </div>
+  </div>
+</div>
+
+
+<style>
+.payroll-card { 
+  border-radius: 10px; 
+  min-height: 120px; 
+  transition: transform 0.2s;
+}
+.payroll-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+</style>

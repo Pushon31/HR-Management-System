@@ -1,1 +1,156 @@
-<p>leave works!</p>
+
+<!-- Leave Dashboard Container -->
+<div class="container-fluid p-3">
+    <h5 class="fw-bold text-dark mb-1">Leave - {{ currentMonth | date: 'MMMM yyyy' }}</h5>
+
+  <!-- Top 4 Summary Cards Centered -->
+  <div class="row justify-content-center g-3 mb-4">
+    <!-- Card 1: Today Present -->
+    <div class="col-6 col-md-3">
+        
+      <div class="card p-3 shadow-sm leave-summary-card border-0 border-hover-green">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h6 class="fw-bold mb-1">Today Present</h6>
+            <p class="text-muted mb-0">970 / 1000</p>
+          </div>
+          <div class="circle-progress text-success">
+            97%
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Planned Leaves -->
+    <div class="col-6 col-md-3">
+      <div class="card p-3 shadow-sm leave-summary-card border-0 border-hover-red">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h6 class="fw-bold mb-1">Planned Leaves</h6>
+            <p class="text-muted mb-0">25 / 1000</p>
+          </div>
+          <div class="circle-progress text-danger">
+            2.5%
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: Unplanned Leaves -->
+    <div class="col-6 col-md-3">
+      <div class="card p-3 shadow-sm leave-summary-card border-0 border-hover-orange">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h6 class="fw-bold mb-1">Unplanned Leaves</h6>
+            <p class="text-muted mb-0">5 / 1000</p>
+          </div>
+          <div class="circle-progress text-warning">
+            0.5%
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4: Pending Requests -->
+    <div class="col-6 col-md-3">
+      <div class="card p-3 shadow-sm leave-summary-card border-0 border-hover-blue">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h6 class="fw-bold mb-1">Pending Requests</h6>
+            <p class="text-muted mb-0">50 / 70</p>
+          </div>
+          <div class="circle-progress text-primary">
+            71%
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leave Table Card -->
+  <div class="card shadow-sm rounded bg-white">
+    <!-- Header -->
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h6 class="mb-0">Employee Attendance</h6>
+      <div class="d-flex gap-2 align-items-center">
+        <input type="text" class="form-control form-control-sm" placeholder="Search Employee">
+        <select class="form-select form-select-sm">
+          <option>2025</option>
+          <option>2024</option>
+          <option>2023</option>
+        </select>
+        <button class="btn btn-outline-primary btn-sm">Download</button>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+      <table class="table table-bordered mb-0 align-middle text-center">
+        <thead class="bg-light">
+          <tr>
+            <th>Employee</th>
+            <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+            <th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
+            <th>11</th><th>12</th><th>13</th><th>14</th><th>15</th>
+            <th>16</th><th>17</th><th>18</th><th>19</th><th>20</th>
+            <th>21</th><th>22</th><th>23</th><th>24</th><th>25</th>
+            <th>26</th><th>27</th><th>28</th><th>29</th><th>30</th><th>31</th>
+            <th>Leave</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let emp of [].constructor(30); let i=index">
+            <td class="text-start">
+              <img src="https://i.pravatar.cc/30?img={{i+1}}" class="rounded-circle me-2" width="30" height="30">
+              Employee {{ i + 1 }}
+            </td>
+            <ng-container *ngFor="let day of [].constructor(31)">
+              <td>
+                <i class="fas fa-check text-success"></i>
+              </td>
+            </ng-container>
+            <td>2</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Pagination -->
+      <div class="d-flex justify-content-between align-items-center p-2 border-top">
+        <button class="btn btn-outline-primary btn-sm">Previous</button>
+        <span>Page 1 of 3</span>
+        <button class="btn btn-outline-primary btn-sm">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.leave-summary-card {
+  border-radius: 10px;
+  transition: all 0.2s;
+  min-height: 120px;
+}
+.leave-summary-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Hover border colors */
+.border-hover-green:hover { border: 2px solid #28a745 !important; }
+.border-hover-red:hover { border: 2px solid #dc3545 !important; }
+.border-hover-orange:hover { border: 2px solid #fd7e14 !important; }
+.border-hover-blue:hover { border: 2px solid #0d6efd !important; }
+
+/* Circular percentage */
+.circle-progress {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+</style>
