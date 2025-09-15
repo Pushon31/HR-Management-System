@@ -1,0 +1,555 @@
+<div class="container-fluid bg-white shadow-sm p-3 rounded mb-4 d-flex justify-content-between align-items-center">
+  <!-- Left Side -->
+  <div>
+    <h4 class="fw-bold text-dark">Welcome to Admin Dashboard</h4>
+    <p class="text-muted mb-0">{{ today | date: 'fullDate' }}</p>
+  </div>
+
+ 
+ 
+</div>
+
+<router-outlet></router-outlet>
+
+ <!-- Div 1 -->
+
+ <!-- div 1  -->
+   <div class="container-fluid px-3">
+  <div class="row g-3">
+
+    <!-- Card 1: Total Employee -->
+    <div class="col-6 col-md-2">
+      <div class="card text-center p-3 shadow-sm" style="background-color: #d0f0c0;">
+        <i class="fas fa-users fa-2x text-success mb-2"></i>
+        <h6 class="fw-bold">Total Employee</h6>
+        <h4 class="fw-bold">1000</h4>
+        <small class="text-success">+5% Last Month</small>
+      </div>
+    </div>
+
+    <!-- Card 2: Present Employee -->
+    <div class="col-6 col-md-2">
+      <div class="card text-center p-3 shadow-sm" style="background-color: #fff9c4;">
+        <i class="fas fa-user-check fa-2x text-warning mb-2"></i>
+        <h6 class="fw-bold">Present Employee</h6>
+        <h4 class="fw-bold">900</h4>
+        <small class="text-success">+3.2% Last Month</small>
+      </div>
+    </div>
+
+    <!-- Card 3: On Leave -->
+    <div class="col-6 col-md-2">
+      <div class="card text-center p-3 shadow-sm" style="background-color: #ffcdd2;">
+        <i class="fas fa-user-times fa-2x text-danger mb-2"></i>
+        <h6 class="fw-bold">On Leave</h6>
+        <h4 class="fw-bold">100</h4>
+        <small class="text-danger">-2% Last Month</small>
+      </div>
+    </div>
+
+    <!-- Card 4: Job Applicants -->
+    <div class="col-6 col-md-2">
+      <div class="card text-center p-3 shadow-sm" style="background-color: #bbdefb;">
+        <i class="fas fa-briefcase fa-2x text-primary mb-2"></i>
+        <h6 class="fw-bold">Job Applicants</h6>
+        <h4 class="fw-bold">500</h4>
+        <small class="text-success">+8% Last Month</small>
+      </div>
+    </div>
+
+    <!-- Card 5: Over Time -->
+    <div class="col-6 col-md-2">
+      <div class="card text-center p-3 shadow-sm" style="background-color: #ffe0b2;">
+        <i class="fas fa-clock fa-2x text-warning mb-2"></i>
+        <h6 class="fw-bold">Over Time</h6>
+        <h4 class="fw-bold">515</h4>
+        <small class="text-danger">-8% Last Month</small>
+      </div>
+    </div>
+
+    <!-- Card 6: Announcement -->
+    <div class="col-12 col-md-2">
+      <div class="card text-center p-3 shadow-sm h-100">
+        <img src="https://gxon.layoutdrop.com/demo/assets/images/media/svg/media1.svg" alt="announcement" class="mb-2" width="50">
+        <h6 class="fw-bold">Create Announcement</h6>
+        <p class="small text-muted">Make an announcement to your employee</p>
+        <button class="btn btn-primary btn-sm">Create Now</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- div 2  -->
+<div class="row g-4">
+  <!-- Box 1: Employee Structure Chart -->
+  <div class="col-12 col-lg-6">
+    <div class="card p-3 bg-white shadow-sm rounded h-100 d-flex flex-column">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="fw-bold mb-0">Employee Structure</h5>
+        <button class="btn btn-outline-primary btn-sm">Download Report</button>
+      </div>
+      <div class="flex-grow-1">
+        <canvas id="employeeChart" style="height:100%; width:100%;"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Box 2: Job Applications -->
+  <div class="col-12 col-lg-6">
+    <div class="card p-3 bg-white shadow-sm rounded h-100 d-flex flex-column">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="fw-bold mb-0">Job Applications</h5>
+        <button class="btn btn-outline-primary btn-sm">View All</button>
+      </div>
+      <div class="flex-grow-1 overflow-auto">
+        <div class="list-group list-group-flush">
+          <div class="list-group-item d-flex align-items-center justify-content-between" *ngFor="let applicant of applicants">
+            <div class="d-flex align-items-center gap-3">
+              <img [src]="applicant.profilePic" alt="profile" class="rounded-circle" width="40" height="40">
+              <div>
+                <div class="fw-bold">{{ applicant.name }}</div>
+                <small class="text-secondary">{{ applicant.post }}</small>
+              </div>
+            </div>
+            <span class="badge" [ngClass]="{
+              'bg-warning': applicant.status==='Pending',
+              'bg-success': applicant.status==='Approved',
+              'bg-danger': applicant.status==='Rejected'
+            }">{{ applicant.status }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- div 3  -->
+ 
+<div class="container-fluid bg-white p-4">
+  <div class="row g-3">
+
+    <!-- Card 1: Employee Type -->
+    <div class="col-12 col-lg-3">
+      <div class="card bg-light shadow-sm rounded h-100">
+        <!-- Header -->
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h6 class="mb-0">Employee Type</h6>
+          <div class="dropdown">
+            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+              Options
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item">Onsite</a></li>
+              <li><a class="dropdown-item">Remote</a></li>
+              <li><a class="dropdown-item">Leave</a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- Body -->
+        <div class="card-body d-flex justify-content-center align-items-center" style="height:180px;">
+          <canvas id="employeeTypeChart"></canvas>
+        </div>
+        <!-- Footer -->
+        <div class="card-footer d-flex justify-content-around">
+          <span><i class="fas fa-circle text-success me-1"></i> Onsite</span>
+          <span><i class="fas fa-circle text-primary me-1"></i> Remote</span>
+          <span><i class="fas fa-circle text-danger me-1"></i> Leave</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Team Overview -->
+    <div class="col-12 col-lg-3">
+      <div class="card bg-light shadow-sm rounded h-100">
+        <!-- Header -->
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h6 class="mb-0">Team</h6>
+          <button class="btn btn-secondary btn-sm">View All</button>
+        </div>
+        <!-- Body -->
+        <div class="card-body">
+          <!-- Team Box Example -->
+          <div class="team-box bg-white rounded p-2 mb-2 d-flex justify-content-between align-items-center">
+            <div>
+              <small>Marketing</small><br>
+              <strong>10 members</strong>
+            </div>
+            <div class="d-flex">
+              <img src="https://i.pravatar.cc/30?img=1" class="rounded-circle me-1" alt="">
+              <img src="https://i.pravatar.cc/30?img=2" class="rounded-circle me-1" alt="">
+              <img src="https://i.pravatar.cc/30?img=3" class="rounded-circle" alt="">
+            </div>
+          </div>
+          <div class="team-box bg-white rounded p-2 mb-2 d-flex justify-content-between align-items-center">
+            <div>
+              <small>IT</small><br>
+              <strong>10 members</strong>
+            </div>
+            <div class="d-flex">
+              <img src="https://i.pravatar.cc/30?img=4" class="rounded-circle me-1" alt="">
+              <img src="https://i.pravatar.cc/30?img=5" class="rounded-circle me-1" alt="">
+              <img src="https://i.pravatar.cc/30?img=6" class="rounded-circle" alt="">
+            </div>
+          </div>
+          <div class="team-box bg-white rounded p-2 mb-2 d-flex justify-content-between align-items-center">
+            <div>
+              <small>HR</small><br>
+              <strong>10 members</strong>
+            </div>
+            <div class="d-flex">
+              <img src="https://i.pravatar.cc/30?img=7" class="rounded-circle me-1" alt="">
+              <img src="https://i.pravatar.cc/30?img=8" class="rounded-circle me-1" alt="">
+              <img src="https://i.pravatar.cc/30?img=9" class="rounded-circle" alt="">
+            </div>
+          </div>
+          <div class="team-box bg-white rounded p-2 mb-2 d-flex justify-content-between align-items-center">
+            <div>
+              <small>Management</small><br>
+              <strong>50 members</strong>
+            </div>
+            <div class="d-flex">
+              <img src="https://i.pravatar.cc/30?img=10" class="rounded-circle me-1" alt="">
+              <img src="https://i.pravatar.cc/30?img=11" class="rounded-circle me-1" alt="">
+              <img src="https://i.pravatar.cc/30?img=12" class="rounded-circle" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: Schedule -->
+    <div class="col-12 col-lg-3">
+      <div class="card bg-light shadow-sm rounded h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h6 class="mb-0">Schedule</h6>
+          <button class="btn btn-secondary btn-sm">Create New</button>
+        </div>
+        <div class="card-body">
+          <div class="row g-2">
+            <div class="col-6 bg-white p-2 text-center">Month Dropdown</div>
+            <div class="col-6 bg-white p-2 text-center">Year Dropdown</div>
+          </div>
+          <div class="bg-white mt-2 p-3 text-center">Calendar Placeholder</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4: Scheduled Items -->
+    <div class="col-12 col-lg-3">
+      <div class="card bg-light shadow-sm rounded h-100">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h6>Team Stand Up</h6>
+            <div class="dropdown">
+              <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                Options
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item">Edit</a></li>
+                <li><a class="dropdown-item">Delete</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="d-flex align-items-center mb-1"><i class="fab fa-google me-1"></i> On Google Meet</div>
+          <div class="d-flex justify-content-between bg-white rounded p-2 mb-2">
+            <span>Marketing</span>
+            <span>10:00 AM</span>
+          </div>
+          <!-- Repeat 5 more scheduled items -->
+          <div class="d-flex justify-content-between bg-white rounded p-2 mb-2">
+            <span>IT</span>
+            <span>11:00 AM</span>
+          </div>
+          <div class="d-flex justify-content-between bg-white rounded p-2 mb-2">
+            <span>HR</span>
+            <span>12:00 PM</span>
+          </div>
+          <div class="d-flex justify-content-between bg-white rounded p-2 mb-2">
+            <span>Management</span>
+            <span>2:00 PM</span>
+          </div>
+          <div class="d-flex justify-content-between bg-white rounded p-2 mb-2">
+            <span>Sales</span>
+            <span>4:00 PM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+.team-box img { width: 30px; height: 30px; }
+.scheduled-item:hover {  background-color: #e6f9e6;  }
+</style>
+
+<!-- div 4  -->
+ <div class="row g-3 mt-4 bg-white p-3">
+  <!-- Card 1: Employee Performance -->
+  <div class="col-12 col-lg-4">
+    <div class="card bg-lightgreen shadow-sm rounded h-100">
+      <!-- Card Header -->
+      <div class="d-flex justify-content-between align-items-center p-3 border-bottom">
+        <h5 class="fw-bold mb-0">Employee Performance</h5>
+        <select class="form-select form-select-sm w-auto">
+          <option>Last Month</option>
+          <option>Category</option>
+        </select>
+      </div>
+      <!-- Card Body: Table -->
+      <div class="p-3 table-responsive">
+        <table class="table table-borderless mb-0">
+          <thead class="bg-light">
+            <tr>
+              <th>Name</th>
+              <th>Score</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><img src="https://i.pravatar.cc/30?img=1" class="rounded-circle me-2" width="30" height="30"> Saiful Alam <br><small class="text-muted">Manager</small></td>
+              <td></td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown"></button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item">Edit</a></li>
+                    <li><a class="dropdown-item text-danger">Delete</a></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="https://i.pravatar.cc/30?img=2" class="rounded-circle me-2" width="30" height="30">Mohammad Jubayer <br><small class="text-muted">HR</small></td>
+              <td></td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown"></button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item">Edit</a></li>
+                    <li><a class="dropdown-item text-danger">Delete</a></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="https://i.pravatar.cc/30?img=3" class="rounded-circle me-2" width="30" height="30"> Toukir Ahmed <br><small class="text-muted">IT</small></td>
+              <td></td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown"></button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item">Edit</a></li>
+                    <li><a class="dropdown-item text-danger">Delete</a></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="https://i.pravatar.cc/30?img=4" class="rounded-circle me-2" width="30" height="30"> Emily Johnson <br><small class="text-muted">Marketing</small></td>
+              <td></td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown"></button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item">Edit</a></li>
+                    <li><a class="dropdown-item text-danger">Delete</a></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="https://i.pravatar.cc/30?img=5" class="rounded-circle me-2" width="30" height="30"> David Wilson <br><small class="text-muted">Sales</small></td>
+              <td></td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown"></button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item">Edit</a></li>
+                    <li><a class="dropdown-item text-danger">Delete</a></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 2: Employee Leave -->
+  <div class="col-12 col-lg-8">
+    <div class="card bg-lightgreen shadow-sm rounded h-100">
+      <!-- Card Header -->
+      <div class="d-flex justify-content-between align-items-center p-3 border-bottom">
+        <h5 class="fw-bold mb-0">Employee Leave</h5>
+        <input type="text" class="form-control form-control-sm w-auto" placeholder="Search...">
+      </div>
+      <!-- Card Body: Table -->
+      <div class="p-3 table-responsive" style="max-height: 500px; overflow-y: auto;">
+        <table class="table table-borderless mb-0">
+          <thead class="bg-light">
+            <tr>
+              <th>Name</th>
+              <th>Department</th>
+              <th>Days</th>
+              <th>Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+              <td><img src="https://i.pravatar.cc/30?img={{i}}" class="rounded-circle me-2" width="30" height="30"> Employee {{i}}</td>
+              <td>Designation {{i}}</td>
+              <td>{{i}} days</td>
+              <td>{{'2025-09-'+(10+i)}}</td>
+              <td>
+                <select class="form-select form-select-sm w-auto">
+                  <option>Approved</option>
+                  <option>Pending</option>
+                  <option>Rejected</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.bg-lightgreen {
+  background-color: #f8f9fa; 
+   
+}
+</style>
+
+<!-- div 5  -->
+ <div class="container-fluid my-3">
+  <div class="row">
+    <!-- Card 1 : Interview Schedule -->
+    <div class="col-lg-7 mb-3">
+      <div class="card h-100 bg-white shadow-sm">
+        <!-- Card Header -->
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">Interview Schedule</h5>
+          <button class="btn btn-link btn-sm">View All</button>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <!-- Interview Item -->
+          <div class="d-flex align-items-center bg-light p-2 rounded mb-2">
+            <img src="https://via.placeholder.com/40" class="rounded-circle me-2" alt="profile">
+            <div>
+              <div class="fw-bold">Rahim Khan</div>
+              <div class="text-muted small">Software Engineer</div>
+            </div>
+            <div class="ms-auto text-end fw-semibold">10:00 AM</div>
+          </div>
+          <!-- Repeat Items -->
+          <div class="d-flex align-items-center bg-light p-2 rounded mb-2">
+            <img src="https://via.placeholder.com/40" class="rounded-circle me-2" alt="profile">
+            <div>
+              <div class="fw-bold">Mehedi</div>
+              <div class="text-muted small">UI/UX Designer</div>
+            </div>
+            <div class="ms-auto text-end fw-semibold">11:30 AM</div>
+          </div>
+          <div class="d-flex align-items-center bg-light p-2 rounded mb-2">
+            <img src="https://via.placeholder.com/40" class="rounded-circle me-2" alt="profile">
+            <div>
+              <div class="fw-bold">Shawon</div>
+              <div class="text-muted small">Project Manager</div>
+            </div>
+            <div class="ms-auto text-end fw-semibold">01:00 PM</div>
+          </div>
+          <div class="d-flex align-items-center bg-light p-2 rounded mb-2">
+            <img src="https://via.placeholder.com/40" class="rounded-circle me-2" alt="profile">
+            <div>
+              <div class="fw-bold">Monisha Moni</div>
+              <div class="text-muted small">QA Engineer</div>
+            </div>
+            <div class="ms-auto text-end fw-semibold">02:15 PM</div>
+          </div>
+          <div class="d-flex align-items-center bg-light p-2 rounded">
+            <img src="https://via.placeholder.com/40" class="rounded-circle me-2" alt="profile">
+            <div>
+              <div class="fw-bold">Syed Noor</div>
+              <div class="text-muted small">Data Analyst</div>
+            </div>
+            <div class="ms-auto text-end fw-semibold">04:00 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 : Task Update -->
+    <div class="col-lg-5 mb-3">
+      <div class="card h-100 bg-white shadow-sm">
+        <!-- Card Header -->
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">Task Update</h5>
+          <div>
+            <button class="btn btn-sm btn-outline-primary me-2">View All</button>
+            <button class="btn btn-sm btn-primary">New Task</button>
+          </div>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-2">
+            <input type="checkbox" class="form-check-input me-2">
+            <div class="flex-grow-1">Prepare monthly financial report 
+              <div class="small text-muted">Due: Today</div>
+            </div>
+            <i class="bi bi-trash text-danger ms-auto"></i>
+          </div>
+          <div class="d-flex align-items-center mb-2">
+            <input type="checkbox" class="form-check-input me-2">
+            <div class="flex-grow-1">Reply to customer emails 
+              <div class="small text-muted">Due: 2 PM</div>
+            </div>
+            <i class="bi bi-trash text-danger ms-auto"></i>
+          </div>
+          <div class="d-flex align-items-center mb-2">
+            <input type="checkbox" class="form-check-input me-2">
+            <div class="flex-grow-1">Update project documentation 
+              <div class="small text-muted">Due: 5 PM</div>
+            </div>
+            <i class="bi bi-trash text-danger ms-auto"></i>
+          </div>
+          <div class="d-flex align-items-center mb-2">
+            <input type="checkbox" class="form-check-input me-2">
+            <div class="flex-grow-1">Team meeting preparation 
+              <div class="small text-muted">Due: Tomorrow</div>
+            </div>
+            <i class="bi bi-trash text-danger ms-auto"></i>
+          </div>
+          <div class="d-flex align-items-center mb-2">
+            <input type="checkbox" class="form-check-input me-2">
+            <div class="flex-grow-1">Bug fixes in dashboard 
+              <div class="small text-muted">Due: Tomorrow</div>
+            </div>
+            <i class="bi bi-trash text-danger ms-auto"></i>
+          </div>
+          <div class="d-flex align-items-center">
+            <input type="checkbox" class="form-check-input me-2">
+            <div class="flex-grow-1">Plan next sprint backlog 
+              <div class="small text-muted">Due: This Week</div>
+            </div>
+            <i class="bi bi-trash text-danger ms-auto"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

@@ -23,6 +23,7 @@ import { AnalyticsComponent } from './components/analytics/analytics.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { HelpSupportComponent } from './components/help-support/help-support.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminDashHomeComponent } from './components/admin-dash-home/admin-dash-home.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { HttpClientModule } from '@angular/common/http';
     TaskManagementComponent,
     AnalyticsComponent,
     CalendarComponent,
-    HelpSupportComponent
+    HelpSupportComponent,
+    AdminDashHomeComponent
   ],
   imports: [
     BrowserModule,

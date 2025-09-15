@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class DashNavComponent {
   @Input() role: string = 'Employee'; // Input property, HTML এ pass করা হবে
-  username = 'John Doe';               // dummy username, প্রয়োজনমতো API থেকে আসবে
+  username = 'Fahim Ahmed';               // dummy username, প্রয়োজনমতো API থেকে আসবে
 
   isSidebarOpen = false;
 
