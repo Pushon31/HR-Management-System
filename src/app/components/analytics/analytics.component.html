@@ -1,1 +1,158 @@
-<p>analytics works!</p>
+<div class="container-fluid py-4">
+
+  <!-- ===== Top Header ===== -->
+  <div class="row mb-4">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+      <h4 class="fw-bold mb-0">Analytics Dashboard</h4>
+      <div>
+        <button class="btn btn-outline-secondary btn-sm me-2">
+          <i class="fas fa-download me-1"></i>Export Data
+        </button>
+        <button class="btn btn-primary btn-sm">
+          <i class="fas fa-sync-alt me-1"></i>Refresh
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== KPI / Key Metrics ===== -->
+  <div class="row g-4 mb-4">
+    <!-- Total Users -->
+    <div class="col-lg-3 col-md-6">
+      <div class="card shadow-sm border-0 p-3 text-center" style="background-color:#e3f2fd;">
+        <i class="fas fa-users fa-2x text-primary mb-2"></i>
+        <h6 class="fw-bold text-primary">Total Users</h6>
+        <h3 class="fw-bold mb-0">25,430</h3>
+        <small class="text-muted">+12% from last month</small>
+      </div>
+    </div>
+
+    <!-- Active Users -->
+    <div class="col-lg-3 col-md-6">
+      <div class="card shadow-sm border-0 p-3 text-center" style="background-color:#e8f5e9;">
+        <i class="fas fa-user-check fa-2x text-success mb-2"></i>
+        <h6 class="fw-bold text-success">Active Users</h6>
+        <h3 class="fw-bold mb-0">18,900</h3>
+        <small class="text-muted">+8% week over week</small>
+      </div>
+    </div>
+
+    <!-- Revenue -->
+    <div class="col-lg-3 col-md-6">
+      <div class="card shadow-sm border-0 p-3 text-center" style="background-color:#fff3e0;">
+        <i class="fas fa-dollar-sign fa-2x text-warning mb-2"></i>
+        <h6 class="fw-bold text-warning">Monthly Revenue</h6>
+        <h3 class="fw-bold mb-0">$82,500</h3>
+        <small class="text-muted">+15% vs last month</small>
+      </div>
+    </div>
+
+    <!-- Conversion Rate -->
+    <div class="col-lg-3 col-md-6">
+      <div class="card shadow-sm border-0 p-3 text-center" style="background-color:#f3e5f5;">
+        <i class="fas fa-chart-line fa-2x text-purple mb-2"></i>
+        <h6 class="fw-bold text-purple">Conversion Rate</h6>
+        <h3 class="fw-bold mb-0">4.7%</h3>
+        <small class="text-muted">Steady Growth</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Charts Section ===== -->
+  <div class="row g-4 mb-4">
+    <!-- Traffic Overview -->
+    <div class="col-lg-8">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">Traffic Overview</h5>
+          <select class="form-select form-select-sm w-auto">
+            <option>Last 7 Days</option>
+            <option>Last 30 Days</option>
+            <option>Last 6 Months</option>
+          </select>
+        </div>
+        <div class="card-body">
+          <!-- Replace with real chart using Chart.js / ApexCharts -->
+          <canvas id="trafficChart" height="140"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Revenue by Month -->
+    <div class="col-lg-4">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">Monthly Revenue</h5>
+          <i class="fas fa-info-circle text-muted"></i>
+        </div>
+        <div class="card-body">
+          <!-- Replace with bar chart -->
+          <canvas id="revenueChart" height="220"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Recent Activities & Insights ===== -->
+  <div class="row g-4">
+    <!-- Recent Activities -->
+    <div class="col-lg-6">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">Recent Activities</h5>
+          <button class="btn btn-link btn-sm">View All</button>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex align-items-center">
+              <i class="fas fa-user-plus text-success me-2"></i>
+              <div>
+                <strong>New User Signup:</strong> Jane Doe
+                <div class="text-muted small">2 mins ago</div>
+              </div>
+            </li>
+            <li class="list-group-item d-flex align-items-center">
+              <i class="fas fa-shopping-cart text-primary me-2"></i>
+              <div>
+                <strong>Order Completed:</strong> #1023
+                <div class="text-muted small">15 mins ago</div>
+              </div>
+            </li>
+            <li class="list-group-item d-flex align-items-center">
+              <i class="fas fa-bug text-danger me-2"></i>
+              <div>
+                <strong>System Alert:</strong> High CPU Usage
+                <div class="text-muted small">30 mins ago</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Insights / Recommendations -->
+    <div class="col-lg-6">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">AI Insights</h5>
+          <i class="fas fa-lightbulb text-warning"></i>
+        </div>
+        <div class="card-body">
+          <p class="mb-2">
+            <i class="fas fa-arrow-up text-success me-1"></i>
+            <strong>User retention</strong> increased by <strong>5%</strong> compared to last week.
+          </p>
+          <p class="mb-2">
+            <i class="fas fa-shopping-basket text-primary me-1"></i>
+            High-value customers are mostly active between <strong>8 PM – 11 PM</strong>. Consider targeted campaigns.
+          </p>
+          <p class="mb-0">
+            <i class="fas fa-globe text-info me-1"></i>
+            Traffic from <strong>Asia</strong> grew by 18%. Localize marketing content for better engagement.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
