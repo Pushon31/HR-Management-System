@@ -17,7 +17,7 @@
       <button class="btn btn-outline-secondary">Leave Request</button>
     </div>
     <div class="ms-auto">
-      <input type="text" class="form-control" placeholder="Search Employee"  />
+      <input type="text" class="form-control" placeholder="Search Employee" />
     </div>
   </div>
 
@@ -25,24 +25,30 @@
   <div class="row g-4">
     <div class="col-12 col-md-3" *ngFor="let emp of pagedEmployees ">
       <div class="card h-100 rounded shadow-sm employee-card" style="background-color: #d0f0c0;">
-        <!-- Card Content Box -->
         <div class="card-content p-3 rounded bg-white">
           <div class="d-flex justify-content-between align-items-start mb-3">
-            <img [src]="emp.profilePic" alt="profile" class="rounded-circle" width="50" height="50">
+            <!-- Update binding for photoUrl -->
+            <img [src]="emp.photoUrl" alt="profile" class="rounded-circle" width="50" height="50">
             <div class="dropdown">
               <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"></button>
               <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" (click)="openEditModal(emp)" >Edit</a></li>
-                <li><a class="dropdown-item text-danger" (click)="deleteEmployee(emp.id)">Delete</a></li>
+                <li><a class="dropdown-item" (click)="openEditModal(emp)">Edit</a></li>
+                <li><a class="dropdown-item text-danger" (click)="deleteEmployee(emp.id!)">Delete</a></li>
               </ul>
             </div>
           </div>
-          <h6 class="fw-bold mb-1 text-dark">{{ emp.name }}</h6>
-          <p class="mb-1 text-secondary">Department: {{ emp.department }}</p>
-          <p class="mb-1 text-secondary">Hired: {{ emp.hiredDate | date }}</p>
+          <!-- Change `emp.name` to `emp.firstName + ' ' + emp.lastName` or show as full name -->
+          <h6 class="fw-bold mb-1 text-dark">{{ emp.firstName }} {{ emp.lastName }}</h6>
+          <!-- Department field binding: backend provides departmentName -->
+          <p class="mb-1 text-secondary">Department: {{ emp.departmentName }}</p>
+          <!-- Hired date is joinDate -->
+          <p class="mb-1 text-secondary">Joined: {{ emp.joinDate | date }}</p>
           <p class="mb-1 text-secondary">Email: {{ emp.email }}</p>
-          <p class="mb-1 text-secondary">Phone: {{ emp.phone }}</p>
-          <span class="badge" [ngClass]="emp.status === 'Active' ? 'bg-success' : 'bg-danger'">{{ emp.status }}</span>
+          <p class="mb-1 text-secondary">Phone: {{ emp.phoneNumber }}</p>
+          <span class="badge"
+                [ngClass]="(emp.status === 'ACTIVE') ? 'bg-success' : 'bg-danger'">
+            {{ emp.status }}
+          </span>
         </div>
       </div>
     </div>
@@ -57,28 +63,23 @@
 </div>
 
 <style>
-.employee-card {
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.employee-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 25px rgba(0,0,0,0.2);
-}
-.card-content img {
-  border: 2px solid #d0f0c0;
-}
-.card-content {
-  transition: background-color 0.3s;
-}
-.card-content:hover {
-  background-color: #f0f8ff;
-}
+  .employee-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .employee-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+  }
+  .card-content img {
+    border: 2px solid #d0f0c0;
+  }
+  .card-content {
+    transition: background-color 0.3s;
+  }
+  .card-content:hover {
+    background-color: #f0f8ff;
+  }
 </style>
-
-
-
-
-<!-- Add edit modal for add and edit click -->
 
 <!-- Add/Edit Employee Modal -->
 <div class="modal fade" id="employeeModal" tabindex="-1" aria-hidden="true">
@@ -91,45 +92,90 @@
       <div class="modal-body">
         <form #empForm="ngForm">
           <div class="mb-2">
-            <label>Name</label>
-            <input type="text" class="form-control" [(ngModel)]="employeeForm.name" name="name" required>
+            <label>First Name</label>
+            <input type="text"
+                   class="form-control"
+                   [(ngModel)]="employeeForm.firstName"
+                   name="firstName"
+                   required>
           </div>
           <div class="mb-2">
-            <label>Department</label>
-            <input type="text" class="form-control" [(ngModel)]="employeeForm.department" name="department" required>
+            <label>Last Name</label>
+            <input type="text"
+                   class="form-control"
+                   [(ngModel)]="employeeForm.lastName"
+                   name="lastName"
+                   required>
           </div>
           <div class="mb-2">
-            <label>Hired Date</label>
-            <input type="date" class="form-control" [(ngModel)]="employeeForm.hiredDate" name="hiredDate" required>
+            <label>Employee Id</label>
+            <input type="text"
+                   class="form-control"
+                   [(ngModel)]="employeeForm.employeeId"
+                   name="employeeId"
+                   required>
+          </div>
+         <div class="mb-2">
+  <label>Department Id</label>
+  <input type="number"
+         class="form-control"
+         [(ngModel)]="employeeForm.departmentId"
+         (ngModelChange)="onDepartmentChange($event)"
+         name="departmentId"
+         placeholder="Leave blank for no department">
+</div>
+
+          <div class="mb-2">
+            <label>Join Date</label>
+            <input type="date"
+                   class="form-control"
+                   [(ngModel)]="employeeForm.joinDate"
+                   name="joinDate">
           </div>
           <div class="mb-2">
             <label>Email</label>
-            <input type="email" class="form-control" [(ngModel)]="employeeForm.email" name="email" required>
+            <input type="email"
+                   class="form-control"
+                   [(ngModel)]="employeeForm.email"
+                   name="email"
+                   required>
           </div>
           <div class="mb-2">
             <label>Phone</label>
-            <input type="text" class="form-control" [(ngModel)]="employeeForm.phone" name="phone" required>
+            <input type="text"
+                   class="form-control"
+                   [(ngModel)]="employeeForm.phoneNumber"
+                   name="phoneNumber">
           </div>
           <div class="mb-2">
             <label>Status</label>
-            <select class="form-select" [(ngModel)]="employeeForm.status" name="status" required>
-              <option value="Active">Active</option>
-              <option value="On Leave">On Leave</option>
+            <select class="form-select"
+                    [(ngModel)]="employeeForm.status"
+                    name="status"
+                    required>
+              <option *ngFor="let s of ['ACTIVE','INACTIVE','TERMINATED','SUSPENDED','ON_LEAVE']"
+                      [value]="s">{{ s }}</option>
             </select>
           </div>
           <div class="mb-2">
-            <label>Profile Pic URL</label>
-            <input type="text" class="form-control" [(ngModel)]="employeeForm.profilePic" name="profilePic">
+            <label>Photo URL</label>
+            <input type="text"
+                   class="form-control"
+                   [(ngModel)]="employeeForm.photoUrl"
+                   name="photoUrl">
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="saveEmployee()">
+        <button type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal">Cancel</button>
+        <button type="button"
+                class="btn btn-primary"
+                (click)="saveEmployee()">
           {{ editingEmployee ? 'Update' : 'Add' }}
         </button>
       </div>
     </div>
   </div>
 </div>
-

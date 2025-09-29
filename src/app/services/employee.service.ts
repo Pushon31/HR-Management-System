@@ -1,44 +1,36 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-export interface Employee{
-  id: number;
-  name: string;
-  department: string; 
-  hiredDate: string; 
-  email: string; 
-  phone: string; 
-  status: string; 
-  profilePic: string;
-  
-}
+import { Employee } from '../model/employeemodel';
 
 @Injectable({
   providedIn: 'root'
 })
-
-
 export class EmployeeService {
+  private baseUrl = 'http://localhost:8080/api/employees';
 
-  private apiUrl = 'http://127.0.0.1:3000/employees';
+  constructor(private http: HttpClient) { }
 
-  constructor(private http : HttpClient) { }
-
-  getEmployees():Observable<Employee[]>{
-    return this.http.get<Employee[]>(this.apiUrl);
-
+  getEmployees(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(this.baseUrl);
   }
 
-  addEmployee(emp:Employee):Observable<Employee>{
-    return this.http.post<Employee>(this.apiUrl,emp);
+  getEmployeeById(id: number): Observable<Employee> {
+    return this.http.get<Employee>(`${this.baseUrl}/${id}`);
   }
 
-  updateEmployee(emp:Employee):Observable<Employee>{
-    return this.http.put<Employee>(this.apiUrl + '/' + emp.id,emp);
+  addEmployee(emp: Employee): Observable<Employee> {
+    return this.http.post<Employee>(this.baseUrl, emp);
   }
 
-  deleteEmployee(id:number):Observable<any>{
-    return this.http.delete(this.apiUrl + '/' + id)
+  updateEmployee(emp: Employee): Observable<Employee> {
+    if (!emp.id) {
+      throw new Error('Employee id required for update');
+    }
+    return this.http.put<Employee>(`${this.baseUrl}/${emp.id}`, emp);
+  }
+
+  deleteEmployee(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
