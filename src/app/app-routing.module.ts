@@ -17,6 +17,7 @@ import { TaskManagementComponent } from './components/task-management/task-manag
 import { AnalyticsComponent } from './components/analytics/analytics.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { HelpSupportComponent } from './components/help-support/help-support.component';
+import { UserManagementComponent } from './components/user-management/user-management.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -49,6 +50,7 @@ const routes: Routes = [
     children: [
       { path: '', component: AdminDashHomeComponent },
       { path: 'employeee', component: EmployeeComponent },
+      { path: 'user-management', component: UserManagementComponent},
       { path: 'attendance', component: AttendanceComponent },
       { path: 'leave', component: LeaveComponent },
       { path: 'payroll', component: PayrollComponent },

@@ -1,0 +1,93 @@
+<div class="container-fluid py-4">
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold">User Role Management</h3>
+    <div class="d-flex gap-2">
+      <input type="text" class="form-control" placeholder="Search users..." 
+             [(ngModel)]="searchTerm" (input)="searchUsers()">
+    </div>
+  </div>
+
+  <!-- Users Table -->
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>User Info</th>
+              <th>Employee Details</th>
+              <th>Roles</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of filteredUsers">
+              <!-- User Info -->
+              <td>
+                <div class="d-flex align-items-center">
+                  <div class="ms-3">
+                    <h6 class="mb-1">{{ user.fullName }}</h6>
+                    <p class="text-muted mb-0">@{{ user.username }}</p>
+                    <small class="text-muted">{{ user.email }}</small>
+                  </div>
+                </div>
+              </td>
+
+              <!-- Employee Details -->
+              <td>
+                <div *ngIf="user.employeeCode; else noEmployee">
+                  <strong>ID:</strong> {{ user.employeeCode }}<br>
+                  <strong>Designation:</strong> {{ user.designation || 'N/A' }}<br>
+                  <strong>Department:</strong> {{ user.departmentName || 'N/A' }}
+                </div>
+                <ng-template #noEmployee>
+                  <span class="text-warning">No employee record</span>
+                </ng-template>
+              </td>
+
+              <!-- Roles -->
+              <td>
+                <div class="d-flex flex-wrap gap-2">
+                  <div *ngFor="let role of availableRoles" class="form-check">
+                    <input class="form-check-input" type="checkbox" 
+                           [id]="'role_' + user.id + '_' + role"
+                           [checked]="hasRole(user, role)"
+                           (change)="onRoleCheckboxChange(user, role, $event)">
+                    <label class="form-check-label small" 
+                           [for]="'role_' + user.id + '_' + role">
+                      {{ getRoleDisplayName(role) }}
+                    </label>
+                  </div>
+                </div>
+              </td>
+
+              <!-- Status -->
+              <td>
+                <span class="badge" 
+                      [ngClass]="user.active ? 'bg-success' : 'bg-danger'">
+                  {{ user.active ? 'Active' : 'Inactive' }}
+                </span>
+              </td>
+
+              <!-- Actions -->
+              <td>
+                <div class="btn-group">
+                  <button class="btn btn-sm btn-outline-secondary" 
+                          (click)="toggleUserStatus(user)">
+                    {{ user.active ? 'Deactivate' : 'Activate' }}
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div *ngIf="filteredUsers.length === 0" class="text-center py-4">
+          <p class="text-muted">No users found</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -27,6 +27,7 @@ import { HelpSupportComponent } from './components/help-support/help-support.com
 import { HttpClientModule } from '@angular/common/http';
 import { AdminDashHomeComponent } from './components/admin-dash-home/admin-dash-home.component';
 import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
+import { UserManagementComponent } from './components/user-management/user-management.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { AccessDeniedComponent } from './components/access-denied/access-denied.
     CalendarComponent,
     HelpSupportComponent,
     AdminDashHomeComponent,
-    AccessDeniedComponent
+    AccessDeniedComponent,
+    UserManagementComponent
   ],
   imports: [
     BrowserModule,
