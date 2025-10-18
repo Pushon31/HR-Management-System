@@ -6,8 +6,8 @@ export interface Employee {
   email: string;
   nidNumber?: string;
   bankAccountNumber?: string;
-  gender?: 'MALE' | 'FEMALE' | 'OTHER';
-  maritalStatus?: 'SINGLE' | 'MARRIED' | 'DIVORCED' | 'WIDOWED';
+  gender?: string;
+  maritalStatus?: string;
   departmentId?: number | null;
   departmentName?: string;
   birthDate?: string;
@@ -16,12 +16,12 @@ export interface Employee {
   emergencyContact?: string;
   address?: string;
   designation?: string;
-  employeeType?: 'FULL_TIME' | 'PART_TIME' | 'CONTRACT' | 'INTERN' | 'PROBATION';
+  employeeType?: string;
   shift?: string;
   basicSalary?: number;
-  profilePic?: string;  // ✅ Backend field name
+  profilePic?: string;
   managerId?: number | null;
   managerName?: string;
-  status?: 'ACTIVE' | 'INACTIVE' | 'TERMINATED' | 'SUSPENDED' | 'ON_LEAVE';
-  workType: string;     // ✅ REQUIRED FIELD
+  status: string;
+  workType: string; // ✅ NEW: Required by backend
 }

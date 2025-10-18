@@ -19,8 +19,19 @@ export class EmployeeService {
     return this.http.get<Employee>(`${this.baseUrl}/${id}`);
   }
 
+  // ✅ FIXED: Use employeeId (business ID) instead of database ID
+  getEmployeeByEmployeeId(employeeId: string): Observable<Employee> {
+    return this.http.get<Employee>(`${this.baseUrl}/employee-id/${employeeId}`);
+  }
+
   addEmployee(emp: Employee): Observable<Employee> {
-    return this.http.post<Employee>(this.baseUrl, emp);
+    // ✅ Ensure required fields are set
+    const employeeToCreate = {
+      ...emp,
+      status: emp.status || 'ACTIVE',
+      workType: emp.workType || 'ONSITE'
+    };
+    return this.http.post<Employee>(this.baseUrl, employeeToCreate);
   }
 
   updateEmployee(emp: Employee): Observable<Employee> {
@@ -33,12 +44,30 @@ export class EmployeeService {
   deleteEmployee(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
-    // ✅ Additional methods that will use backend security
+
+  // ✅ Additional backend-aligned methods
   getEmployeesByDepartment(departmentId: number): Observable<Employee[]> {
     return this.http.get<Employee[]>(`${this.baseUrl}/department/${departmentId}`);
   }
 
+  getEmployeesByType(employeeType: string): Observable<Employee[]> {
+    return this.http.get<Employee[]>(`${this.baseUrl}/type/${employeeType}`);
+  }
+
+  getEmployeesByStatus(status: string): Observable<Employee[]> {
+    return this.http.get<Employee[]>(`${this.baseUrl}/status/${status}`);
+  }
+
+  // ✅ Manager-related methods
   getManagerTeam(managerId: number): Observable<Employee[]> {
     return this.http.get<Employee[]>(`${this.baseUrl}/manager/${managerId}/team`);
+  }
+
+  assignManager(employeeId: number, managerId: number): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}/${employeeId}/manager/${managerId}`, {});
+  }
+
+  getEmployeesWithoutManager(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(`${this.baseUrl}/no-manager`);
   }
 }

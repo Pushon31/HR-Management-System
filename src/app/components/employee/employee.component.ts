@@ -15,18 +15,38 @@ export class EmployeeComponent implements OnInit {
   page: number = 1;
   pageSize: number = 20;
 
-  employeeForm: Employee = this.initializeEmptyEmployee();
+  // ✅ সম্পূর্ণ ফর্ম মডেল ব্যাকেন্ড DTO-এর সাথে মিল রেখে
+  employeeForm: Employee = {
+    firstName: '',
+    lastName: '',
+    employeeId: '',
+    email: '',
+    status: 'ACTIVE',
+    workType: 'ONSITE',
+    employeeType: 'FULL_TIME',
+    gender: 'MALE',
+    maritalStatus: 'SINGLE',
+    departmentId: null,
+    managerId: null,
+    nidNumber: '',
+    bankAccountNumber: '',
+    phoneNumber: '',
+    designation: '',
+    basicSalary: 0,
+    joinDate: new Date().toISOString().split('T')[0], // আজকের তারিখ
+    profilePic: ''
+  };
+
   editingEmployee: Employee | null = null;
 
-  // ✅ Work Type Options - Backend enum er moto
+  // ✅ ব্যাকেন্ড Enum-এর অপশনগুলি
   workTypeOptions = ['ONSITE', 'REMOTE', 'HYBRID'];
-  
-  // ✅ Employee Type Options - Backend enum er moto
   employeeTypeOptions = ['FULL_TIME', 'PART_TIME', 'CONTRACT', 'INTERN', 'PROBATION'];
-  
-  // ✅ Status Options - Backend enum er moto
   statusOptions = ['ACTIVE', 'INACTIVE', 'TERMINATED', 'SUSPENDED', 'ON_LEAVE'];
-Math: any;
+  genderOptions = ['MALE', 'FEMALE', 'OTHER'];
+  maritalStatusOptions = ['SINGLE', 'MARRIED', 'DIVORCED', 'WIDOWED'];
+
+  Math = Math;
 
   constructor(private empService: EmployeeService) { }
 
@@ -36,12 +56,14 @@ Math: any;
 
   loadEmployees(): void {
     this.empService.getEmployees().subscribe(
-      data => {
+      (data: Employee[]) => {
         this.employees = data;
         this.setPage(this.page);
+        console.log('Employees loaded:', data);
       },
       err => {
-        console.error('Failed to load employees', err);
+        console.error('Employees load failed', err);
+        alert('Employees load error: ' + err.message);
       }
     );
   }
@@ -67,73 +89,92 @@ Math: any;
 
   deleteEmployee(id: number | undefined): void {
     if (!id) {
-      console.warn('deleteEmployee called without id');
+      console.warn('Delete employee called without id');
       return;
     }
-    if (!confirm('Are you sure?')) {
+    if (!confirm('Are you sure to delete?')) {
       return;
     }
     this.empService.deleteEmployee(id).subscribe(
       () => {
         this.loadEmployees();
+        alert('Employee deleted successfully!');
       },
       err => {
         console.error('Delete failed', err);
+        alert('Delete error: ' + err.message);
       }
     );
   }
 
   openAddModal(): void {
     this.editingEmployee = null;
-    this.employeeForm = this.initializeEmptyEmployee();
-
-    const modalEl = document.getElementById('employeeModal');
-    const modal = new bootstrap.Modal(modalEl!);
-    modal.show();
+    this.employeeForm = {
+      firstName: '',
+      lastName: '',
+      employeeId: '',
+      email: '',
+      status: 'ACTIVE',
+      workType: 'ONSITE',
+      employeeType: 'FULL_TIME',
+      gender: 'MALE',
+      maritalStatus: 'SINGLE',
+      departmentId: null,
+      managerId: null,
+      nidNumber: '',
+      bankAccountNumber: '',
+      phoneNumber: '',
+      designation: '',
+      basicSalary: 0,
+      joinDate: new Date().toISOString().split('T')[0],
+      profilePic: ''
+    };
+    this.showModal();
   }
 
   openEditModal(emp: Employee): void {
     this.editingEmployee = emp;
     this.employeeForm = { ...emp };
+    
+    // তারিখ ফরম্যাট ঠিক করা
+    if (this.employeeForm.joinDate) {
+      this.employeeForm.joinDate = this.formatDateForInput(this.employeeForm.joinDate);
+    }
+    if (this.employeeForm.birthDate) {
+      this.employeeForm.birthDate = this.formatDateForInput(this.employeeForm.birthDate);
+    }
 
-    const modalEl = document.getElementById('employeeModal');
-    const modal = new bootstrap.Modal(modalEl!);
-    modal.show();
+    this.showModal();
   }
 
   saveEmployee(): void {
-    // ✅ Sanitize departmentId
-    if (this.employeeForm.departmentId === undefined ||
-        this.employeeForm.departmentId === null ||
-        this.employeeForm.departmentId <= 0) {
-      this.employeeForm.departmentId = null;
-    }
-
-    // ✅ Sanitize managerId
-    if (this.employeeForm.managerId === undefined ||
-        this.employeeForm.managerId === null ||
-        this.employeeForm.managerId <= 0) {
-      this.employeeForm.managerId = null;
-    }
+    // ডেটা স্যানিটাইজেশন
+    this.sanitizeFormData();
 
     if (this.editingEmployee && this.employeeForm.id) {
+      // আপডেট করা
       this.empService.updateEmployee(this.employeeForm).subscribe(
-        () => {
+        (updatedEmployee: Employee) => {
           this.loadEmployees();
-          bootstrap.Modal.getInstance(document.getElementById('employeeModal')!)?.hide();
+          this.hideModal();
+          alert('Employee updated successfully!');
         },
         err => {
           console.error('Update failed', err);
+          alert('Update error: ' + err.message);
         }
       );
     } else {
+      // নতুন এমপ্লয়ী তৈরি করা
       this.empService.addEmployee(this.employeeForm).subscribe(
-        () => {
+        (newEmployee: Employee) => {
           this.loadEmployees();
-          bootstrap.Modal.getInstance(document.getElementById('employeeModal')!)?.hide();
+          this.hideModal();
+          alert('Employee added successfully!');
         },
         err => {
           console.error('Create failed', err);
+          alert('Create error: ' + err.message);
         }
       );
     }
@@ -147,25 +188,52 @@ Math: any;
     }
   }
 
-  private initializeEmptyEmployee(): Employee {
-    return {
-      firstName: '',
-      lastName: '',
-      employeeId: '',
-      email: '',
-      status: 'ACTIVE',
-      departmentId: null,
-      managerId: null,
-      workType: 'ONSITE', // ✅ ADDED - Required field
-      // ✅ Other important fields from backend
-      nidNumber: '',
-      bankAccountNumber: '',
-      phoneNumber: '',
-      designation: '',
-      basicSalary: 0,
-      employeeType: 'FULL_TIME',
-      gender: 'MALE',
-      maritalStatus: 'SINGLE'
-    };
+  onManagerChange(value: any): void {
+    if (value === '' || value === null || value === undefined || value === 0) {
+      this.employeeForm.managerId = null;
+    } else {
+      this.employeeForm.managerId = +value;
+    }
+  }
+
+  private sanitizeFormData(): void {
+    // অপশনাল ফিল্ডগুলি খালি স্ট্রিং হলে null সেট করা
+    const optionalFields = ['nidNumber', 'bankAccountNumber', 'phoneNumber', 'designation', 'profilePic', 'emergencyContact', 'address', 'shift'];
+    optionalFields.forEach(field => {
+      if (this.employeeForm[field as keyof Employee] === '') {
+        (this.employeeForm as any)[field] = null;
+      }
+    });
+
+    // নম্বর ফিল্ডগুলি হ্যান্ডল করা
+    if (this.employeeForm.departmentId === undefined || this.employeeForm.departmentId === null || this.employeeForm.departmentId <= 0) {
+      this.employeeForm.departmentId = null;
+    }
+    if (this.employeeForm.managerId === undefined || this.employeeForm.managerId === null || this.employeeForm.managerId <= 0) {
+      this.employeeForm.managerId = null;
+    }
+    if (!this.employeeForm.basicSalary || this.employeeForm.basicSalary < 0) {
+      this.employeeForm.basicSalary = 0;
+    }
+  }
+
+  private formatDateForInput(dateString: string): string {
+    if (!dateString) return '';
+    return dateString.split('T')[0];
+  }
+
+  private showModal(): void {
+    const modalEl = document.getElementById('employeeModal');
+    if (modalEl) {
+      const modal = new bootstrap.Modal(modalEl);
+      modal.show();
+    }
+  }
+
+  private hideModal(): void {
+    const modal = bootstrap.Modal.getInstance(document.getElementById('employeeModal')!);
+    if (modal) {
+      modal.hide();
+    }
   }
 }
