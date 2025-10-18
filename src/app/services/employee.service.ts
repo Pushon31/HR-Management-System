@@ -33,4 +33,12 @@ export class EmployeeService {
   deleteEmployee(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
+    // ✅ Additional methods that will use backend security
+  getEmployeesByDepartment(departmentId: number): Observable<Employee[]> {
+    return this.http.get<Employee[]>(`${this.baseUrl}/department/${departmentId}`);
+  }
+
+  getManagerTeam(managerId: number): Observable<Employee[]> {
+    return this.http.get<Employee[]>(`${this.baseUrl}/manager/${managerId}/team`);
+  }
 }

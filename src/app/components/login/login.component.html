@@ -1,22 +1,59 @@
-<<!-- login.component.html -->
-<div class="container mt-5">
+<!-- login.component.html -->
+<div class="container">
   <div class="row justify-content-center">
     <div class="col-md-5">
-      <div class="card shadow-lg" style="background-color: #1a1a2e; color: #ffffff;">
-        <div class="card-body p-4">
-          <h3 class="card-title text-center mb-4" style="color: #00bfff;">Login</h3>
+      <div class="card shadow-lg">
+        <div class="card-body">
+          <h3 class="card-title text-center mb-4">Login</h3>
+          
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <!-- Username Field -->
             <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter your email">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" id="username" formControlName="username" class="form-control" 
+                     [ngClass]="{'is-invalid': isFieldInvalid('username')}"
+                     placeholder="Enter your username">
+              <div *ngIf="isFieldInvalid('username')" class="text-danger">
+                {{ getFieldError('username') }}
+              </div>
             </div>
+
+            <!-- Password Field -->
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
-              <input type="password" id="password" formControlName="password" class="form-control" placeholder="Enter your password">
+              <input type="password" id="password" formControlName="password" class="form-control" 
+                     [ngClass]="{'is-invalid': isFieldInvalid('password')}"
+                     placeholder="Enter your password">
+              <div *ngIf="isFieldInvalid('password')" class="text-danger">
+                {{ getFieldError('password') }}
+              </div>
             </div>
-            <button type="submit" class="btn w-100" style="background-color: #00bfff; color: #1a1a2e;" routerLink="/empDashboard">Login</button>
+
+            <!-- Login Button -->
+            <button type="submit" class="btn btn-primary w-100" 
+                    [disabled]="loginForm.invalid || isLoading"
+                    [ngClass]="{'btn-loading': isLoading}">
+              <span *ngIf="!isLoading">Login</span>
+              <span *ngIf="isLoading">Logging in...</span>
+            </button>
           </form>
-          <p class="text-center mt-3">Don't have an account? <a routerLink="/signup" style="color: #00bfff;">Sign Up</a></p>
+
+          <!-- Error Message -->
+          <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+            {{ errorMessage }}
+          </div>
+
+          <!-- Demo Credentials -->
+          <div class="demo-credentials">
+            <h6 class="text-center mb-2">Demo Credentials</h6>
+            <p class="mb-1"><strong>Admin:</strong> admin / admin123</p>
+            <p class="mb-0"><strong>Role:</strong> Full System Access</p>
+          </div>
+
+          <p class="text-center mt-3">
+            Don't have an account? 
+            <a routerLink="/signup">Sign Up</a>
+          </p>
         </div>
       </div>
     </div>

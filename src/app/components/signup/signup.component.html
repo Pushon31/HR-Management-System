@@ -1,37 +1,121 @@
-<!-- signup.component.html -->
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="card shadow-lg" style="background-color: #1a1a2e; color: #ffffff;">
         <div class="card-body p-4">
-          <h3 class="card-title text-center mb-4" style="color: #00bfff;">Sign Up</h3>
+          <h3 class="card-title text-center mb-4" style="color: #00bfff;">Employee Registration</h3>
+          
           <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+            <!-- Username Field -->
             <div class="mb-3">
-              <label for="name" class="form-label">Full Name</label>
-              <input type="text" id="name" formControlName="name" class="form-control" placeholder="Enter your full name">
+              <label for="username" class="form-label">Username *</label>
+              <input type="text" id="username" formControlName="username" class="form-control" 
+                     [class.is-invalid]="signupForm.get('username')?.invalid && signupForm.get('username')?.touched"
+                     placeholder="Choose a username">
+              <div *ngIf="signupForm.get('username')?.invalid && signupForm.get('username')?.touched" 
+                   class="text-danger small mt-1">
+                Username is required
+              </div>
             </div>
+
+            <!-- Full Name Field -->
             <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter your email">
+              <label for="fullName" class="form-label">Full Name *</label>
+              <input type="text" id="fullName" formControlName="fullName" class="form-control" 
+                     [class.is-invalid]="signupForm.get('fullName')?.invalid && signupForm.get('fullName')?.touched"
+                     placeholder="Enter your full name">
+              <div *ngIf="signupForm.get('fullName')?.invalid && signupForm.get('fullName')?.touched" 
+                   class="text-danger small mt-1">
+                Full name is required
+              </div>
             </div>
+
+            <!-- Email Field -->
             <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input type="password" id="password" formControlName="password" class="form-control" placeholder="Enter your password">
+              <label for="email" class="form-label">Email *</label>
+              <input type="email" id="email" formControlName="email" class="form-control" 
+                     [class.is-invalid]="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
+                     placeholder="Enter your company email">
+              <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" 
+                   class="text-danger small mt-1">
+                <span *ngIf="signupForm.get('email')?.errors?.['required']">Email is required</span>
+                <span *ngIf="signupForm.get('email')?.errors?.['email']">Please enter a valid email</span>
+              </div>
             </div>
+
+            <!-- Password Field -->
+            <div class="mb-4">
+              <label for="password" class="form-label">Password *</label>
+              <input type="password" id="password" formControlName="password" class="form-control" 
+                     [class.is-invalid]="signupForm.get('password')?.invalid && signupForm.get('password')?.touched"
+                     placeholder="Create a strong password">
+              <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" 
+                   class="text-danger small mt-1">
+                <span *ngIf="signupForm.get('password')?.errors?.['required']">Password is required</span>
+                <span *ngIf="signupForm.get('password')?.errors?.['minlength']">
+                  Password must be at least 6 characters
+                </span>
+              </div>
+            </div>
+
+            <!-- Employee ID Field (Optional but recommended) -->
             <div class="mb-3">
-              <label for="role" class="form-label">Role</label>
-              <select id="role" formControlName="role" class="form-select">
-                <option value="employee">Employee</option>
-                <option value="manager">Manager</option>
-                <option value="admin">Admin</option>
-              </select>
+              <label for="employeeId" class="form-label">Employee ID</label>
+              <input type="text" id="employeeId" formControlName="employeeId" class="form-control" 
+                     placeholder="Your company employee ID (optional)">
+              <div class="form-text">If you don't have an employee ID, leave this blank</div>
             </div>
-            <button type="submit" class="btn w-100" style="background-color: #00bfff; color: #1a1a2e;">Sign Up</button>
+
+            <!-- Department Field (Optional) -->
+            <div class="mb-3">
+              <label for="department" class="form-label">Department</label>
+              <input type="text" id="department" formControlName="department" class="form-control" 
+                     placeholder="Your department (optional)">
+            </div>
+
+            <!-- Role Information (Read-only) -->
+            <div class="alert alert-info mt-3">
+              <h6 class="alert-heading">Role Information</h6>
+              <p class="mb-0 small">
+                <strong>Default Role:</strong> EMPLOYEE<br>
+                Your account will be created with basic employee privileges. 
+                Higher roles (Manager, Admin, HR, Accountant) can only be assigned by system administrators.
+              </p>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn w-100 mt-3" 
+                    [style.background-color]="signupForm.valid ? '#00bfff' : '#6c757d'"
+                    [disabled]="signupForm.invalid || isLoading"
+                    style="color: #1a1a2e;">
+              <span *ngIf="!isLoading">Create Employee Account</span>
+              <span *ngIf="isLoading">Creating Account...</span>
+            </button>
           </form>
-          <p class="text-center mt-3">Already have an account? <a routerLink="/login" style="color: #00bfff;">Login</a></p>
+
+          <!-- Success/Error Messages -->
+          <div *ngIf="successMessage" class="alert alert-success mt-3">
+            {{ successMessage }}
+          </div>
+
+          <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+            {{ errorMessage }}
+          </div>
+
+          <p class="text-center mt-3">
+            Already have an account? 
+            <a routerLink="/login" style="color: #00bfff;">Login</a>
+          </p>
+
+          <!-- Admin Registration Note -->
+          <div class="text-center mt-4 pt-3 border-top">
+            <p class="small text-muted">
+              <strong>For Admin/Manager Registration:</strong><br>
+              Please contact system administrator or use the default admin account.
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-

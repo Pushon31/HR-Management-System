@@ -1,0 +1,92 @@
+.card {
+  border: none;
+  border-radius: 12px;
+  
+  .card-body {
+    padding: 2rem;
+  }
+}
+
+.form-control, .form-select {
+  background-color: #16213e;
+  border: 1px solid #0f3460;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+
+  &::placeholder {
+    color: #6c757d;
+  }
+
+  &:focus {
+    background-color: #16213e;
+    border-color: #00bfff;
+    color: #ffffff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 191, 255, 0.25);
+  }
+
+  &.is-invalid {
+    border-color: #dc3545;
+    
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+    }
+  }
+}
+
+.form-select[multiple] {
+  height: auto;
+  min-height: 120px;
+}
+
+.btn {
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.alert {
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  
+  &-success {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: #d4edda;
+    border-left: 4px solid #28a745;
+  }
+  
+  &-danger {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #f8d7da;
+    border-left: 4px solid #dc3545;
+  }
+}
+
+.form-text {
+  color: #6c757d;
+  font-size: 0.875rem;
+}
+
+.text-danger {
+  font-size: 0.875rem;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .container {
+    margin-top: 2rem;
+  }
+  
+  .card .card-body {
+    padding: 1.5rem;
+  }
+}

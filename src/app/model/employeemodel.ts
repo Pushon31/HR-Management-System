@@ -8,9 +8,9 @@ export interface Employee {
   bankAccountNumber?: string;
   gender?: 'MALE' | 'FEMALE' | 'OTHER';
   maritalStatus?: 'SINGLE' | 'MARRIED' | 'DIVORCED' | 'WIDOWED';
-departmentId?: number | null;
-  departmentName?: string;          // comes from @JsonIgnore (optional, backend may skip)
-  birthDate?: string;               // use string for ISO date from API
+  departmentId?: number | null;
+  departmentName?: string;
+  birthDate?: string;
   joinDate?: string;
   phoneNumber?: string;
   emergencyContact?: string;
@@ -18,9 +18,10 @@ departmentId?: number | null;
   designation?: string;
   employeeType?: 'FULL_TIME' | 'PART_TIME' | 'CONTRACT' | 'INTERN' | 'PROBATION';
   shift?: string;
-  basicSalary?: number;             // BigDecimal → number
-  photoUrl?: string;
+  basicSalary?: number;
+  profilePic?: string;  // ✅ Backend field name
   managerId?: number | null;
-  managerName?: string;             // @JsonIgnore – optional
+  managerName?: string;
   status?: 'ACTIVE' | 'INACTIVE' | 'TERMINATED' | 'SUSPENDED' | 'ON_LEAVE';
+  workType: string;     // ✅ REQUIRED FIELD
 }

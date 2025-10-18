@@ -1,0 +1,107 @@
+:host {
+  display: block;
+}
+
+// Table Styles
+.table {
+  th, td {
+    min-width: 35px;
+    padding: 0.4rem;
+    font-size: 0.75rem;
+    vertical-align: middle;
+    
+    &:first-child {
+      min-width: 180px;
+      text-align: left;
+    }
+  }
+  
+  th {
+    background-color: #f8f9fa !important;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  
+  td i {
+    font-size: 0.7rem;
+    cursor: pointer;
+    
+    &:hover {
+      transform: scale(1.2);
+      transition: transform 0.2s;
+    }
+  }
+}
+
+// Card Styles
+.card {
+  border: none;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  
+  .card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    padding: 0.75rem 1rem;
+    
+    h6 {
+      color: #495057;
+      font-weight: 600;
+    }
+  }
+}
+
+// Badge Styles
+.badge {
+  font-size: 0.7rem;
+  padding: 0.35em 0.65em;
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .table-responsive {
+    font-size: 0.7rem;
+    
+    th, td {
+      min-width: 25px;
+      padding: 0.25rem;
+      
+      &:first-child {
+        min-width: 120px;
+      }
+    }
+  }
+  
+  .card-header {
+    .d-flex {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+}
+
+// Loading Animation
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.fa-spinner {
+  animation: spin 1s linear infinite;
+}
+
+// Hover Effects
+.btn {
+  transition: all 0.2s ease-in-out;
+  
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+// Chart Container
+.card-body canvas {
+  max-height: 100%;
+  transition: opacity 0.3s ease-in-out;
+}

@@ -18,6 +18,16 @@ export class EmployeeComponent implements OnInit {
   employeeForm: Employee = this.initializeEmptyEmployee();
   editingEmployee: Employee | null = null;
 
+  // ✅ Work Type Options - Backend enum er moto
+  workTypeOptions = ['ONSITE', 'REMOTE', 'HYBRID'];
+  
+  // ✅ Employee Type Options - Backend enum er moto
+  employeeTypeOptions = ['FULL_TIME', 'PART_TIME', 'CONTRACT', 'INTERN', 'PROBATION'];
+  
+  // ✅ Status Options - Backend enum er moto
+  statusOptions = ['ACTIVE', 'INACTIVE', 'TERMINATED', 'SUSPENDED', 'ON_LEAVE'];
+Math: any;
+
   constructor(private empService: EmployeeService) { }
 
   ngOnInit(): void {
@@ -92,14 +102,19 @@ export class EmployeeComponent implements OnInit {
   }
 
   saveEmployee(): void {
-    // sanitize departmentId: set to null if invalid / empty
+    // ✅ Sanitize departmentId
     if (this.employeeForm.departmentId === undefined ||
         this.employeeForm.departmentId === null ||
         this.employeeForm.departmentId <= 0) {
       this.employeeForm.departmentId = null;
     }
 
-    // similarly, if you handle managerId, do same sanitization
+    // ✅ Sanitize managerId
+    if (this.employeeForm.managerId === undefined ||
+        this.employeeForm.managerId === null ||
+        this.employeeForm.managerId <= 0) {
+      this.employeeForm.managerId = null;
+    }
 
     if (this.editingEmployee && this.employeeForm.id) {
       this.empService.updateEmployee(this.employeeForm).subscribe(
@@ -125,7 +140,6 @@ export class EmployeeComponent implements OnInit {
   }
 
   onDepartmentChange(value: any): void {
-    // treat blank, zero, undefined, null as null
     if (value === '' || value === null || value === undefined || value === 0) {
       this.employeeForm.departmentId = null;
     } else {
@@ -141,8 +155,17 @@ export class EmployeeComponent implements OnInit {
       email: '',
       status: 'ACTIVE',
       departmentId: null,
-      managerId: null
-      // other optional fields left undefined
+      managerId: null,
+      workType: 'ONSITE', // ✅ ADDED - Required field
+      // ✅ Other important fields from backend
+      nidNumber: '',
+      bankAccountNumber: '',
+      phoneNumber: '',
+      designation: '',
+      basicSalary: 0,
+      employeeType: 'FULL_TIME',
+      gender: 'MALE',
+      maritalStatus: 'SINGLE'
     };
   }
 }
