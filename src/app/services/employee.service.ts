@@ -70,4 +70,7 @@ export class EmployeeService {
   getEmployeesWithoutManager(): Observable<Employee[]> {
     return this.http.get<Employee[]>(`${this.baseUrl}/no-manager`);
   }
+  getEmployeeWorkTypeStats(): Observable<any> {
+  return this.http.get<any>('/api/employees/worktype-stats');
+}
 }

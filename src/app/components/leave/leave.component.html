@@ -1,124 +1,268 @@
-
 <!-- Leave Dashboard Container -->
 <div class="container-fluid p-3">
-    <h5 class="fw-bold text-dark mb-1">Leave - {{ currentMonth | date: 'MMMM yyyy' }}</h5>
+  <h5 class="fw-bold text-dark mb-1">Leave Management - {{ currentMonth | date: 'MMMM yyyy' }}</h5>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="isLoading" class="text-center py-4">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
 
   <!-- Top 4 Summary Cards Centered -->
-  <div class="row justify-content-center g-3 mb-4">
-    <!-- Card 1: Today Present -->
-    <div class="col-6 col-md-3">
-        
-      <div class="card p-3 shadow-sm leave-summary-card border-0 border-hover-green">
-        <div class="d-flex justify-content-between align-items-center">
-          <div>
-            <h6 class="fw-bold mb-1">Today Present</h6>
-            <p class="text-muted mb-0">970 / 1000</p>
-          </div>
-          <div class="circle-progress text-success">
-            97%
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Card 2: Planned Leaves -->
-    <div class="col-6 col-md-3">
-      <div class="card p-3 shadow-sm leave-summary-card border-0 border-hover-red">
-        <div class="d-flex justify-content-between align-items-center">
-          <div>
-            <h6 class="fw-bold mb-1">Planned Leaves</h6>
-            <p class="text-muted mb-0">25 / 1000</p>
-          </div>
-          <div class="circle-progress text-danger">
-            2.5%
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Card 3: Unplanned Leaves -->
-    <div class="col-6 col-md-3">
-      <div class="card p-3 shadow-sm leave-summary-card border-0 border-hover-orange">
-        <div class="d-flex justify-content-between align-items-center">
-          <div>
-            <h6 class="fw-bold mb-1">Unplanned Leaves</h6>
-            <p class="text-muted mb-0">5 / 1000</p>
-          </div>
-          <div class="circle-progress text-warning">
-            0.5%
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Card 4: Pending Requests -->
+  <div class="row justify-content-center g-3 mb-4" *ngIf="!isLoading">
+    <!-- Card 1: Total Leave Applications -->
     <div class="col-6 col-md-3">
       <div class="card p-3 shadow-sm leave-summary-card border-0 border-hover-blue">
         <div class="d-flex justify-content-between align-items-center">
           <div>
-            <h6 class="fw-bold mb-1">Pending Requests</h6>
-            <p class="text-muted mb-0">50 / 70</p>
+            <h6 class="fw-bold mb-1">Total Applications</h6>
+            <p class="text-muted mb-0">{{ leaveStats?.['totalApplications'] || 0 }} Applications</p>
           </div>
           <div class="circle-progress text-primary">
-            71%
+            {{ leaveStats?.['totalApplications'] || 0 }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Pending Applications -->
+    <div class="col-6 col-md-3">
+      <div class="card p-3 shadow-sm leave-summary-card border-0 border-hover-orange">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h6 class="fw-bold mb-1">Pending Requests</h6>
+            <p class="text-muted mb-0">{{ leaveStats?.PENDING || 0 }} Pending</p>
+          </div>
+          <div class="circle-progress text-warning">
+            {{ leaveStats?.PENDING || 0 }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: Approved Leaves -->
+    <div class="col-6 col-md-3">
+      <div class="card p-3 shadow-sm leave-summary-card border-0 border-hover-green">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h6 class="fw-bold mb-1">Approved Leaves</h6>
+            <p class="text-muted mb-0">{{ leaveStats?.APPROVED || 0 }} Approved</p>
+          </div>
+          <div class="circle-progress text-success">
+            {{ leaveStats?.APPROVED || 0 }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4: Rejected Leaves -->
+    <div class="col-6 col-md-3">
+      <div class="card p-3 shadow-sm leave-summary-card border-0 border-hover-red">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h6 class="fw-bold mb-1">Rejected Leaves</h6>
+            <p class="text-muted mb-0">{{ leaveStats?.REJECTED || 0 }} Rejected</p>
+          </div>
+          <div class="circle-progress text-danger">
+            {{ leaveStats?.REJECTED || 0 }}
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Leave Table Card -->
-  <div class="card shadow-sm rounded bg-white">
+  <!-- Quick Actions -->
+  <div class="row mb-4" *ngIf="!isLoading">
+    <div class="col-12">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="d-flex gap-2 flex-wrap">
+            <button class="btn btn-primary btn-sm" (click)="loadPendingLeaves()">
+              <i class="fas fa-clock me-1"></i> View Pending ({{ leaveStats?.PENDING || 0 }})
+            </button>
+            <button class="btn btn-success btn-sm" (click)="loadApprovedLeaves()">
+              <i class="fas fa-check me-1"></i> View Approved ({{ leaveStats?.APPROVED || 0 }})
+            </button>
+            <button class="btn btn-warning btn-sm" (click)="loadUpcomingLeaves()">
+              <i class="fas fa-calendar me-1"></i> Upcoming Leaves
+            </button>
+            <button class="btn btn-info btn-sm" (click)="showLeaveStats = !showLeaveStats">
+              <i class="fas fa-chart-bar me-1"></i> Toggle Statistics
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leave Statistics Chart -->
+  <div class="row mb-4" *ngIf="showLeaveStats && !isLoading">
+    <div class="col-12">
+      <div class="card shadow-sm">
+        <div class="card-header">
+          <h6 class="mb-0">Leave Statistics</h6>
+        </div>
+        <div class="card-body">
+          <div class="row text-center">
+            <div class="col-3">
+              <div class="border-end">
+                <h4 class="text-primary">{{ leaveStats?.PENDING || 0 }}</h4>
+                <small class="text-muted">Pending</small>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="border-end">
+                <h4 class="text-success">{{ leaveStats?.APPROVED || 0 }}</h4>
+                <small class="text-muted">Approved</small>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="border-end">
+                <h4 class="text-danger">{{ leaveStats?.REJECTED || 0 }}</h4>
+                <small class="text-muted">Rejected</small>
+              </div>
+            </div>
+            <div class="col-3">
+              <h4 class="text-info">{{ leaveStats?.CANCELLED || 0 }}</h4>
+              <small class="text-muted">Cancelled</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leave Applications Table -->
+  <div class="card shadow-sm rounded bg-white" *ngIf="!isLoading">
     <!-- Header -->
     <div class="card-header d-flex justify-content-between align-items-center">
-      <h6 class="mb-0">Employee Attendance</h6>
+      <h6 class="mb-0">Leave Applications</h6>
       <div class="d-flex gap-2 align-items-center">
-        <input type="text" class="form-control form-control-sm" placeholder="Search Employee">
-        <select class="form-select form-select-sm">
-          <option>2025</option>
-          <option>2024</option>
-          <option>2023</option>
+        <input type="text" class="form-control form-control-sm" placeholder="Search Employee" 
+               [(ngModel)]="searchTerm" (input)="filterLeaves()">
+        <select class="form-select form-select-sm" [(ngModel)]="selectedStatus" (change)="filterLeaves()">
+          <option value="">All Status</option>
+          <option value="PENDING">Pending</option>
+          <option value="APPROVED">Approved</option>
+          <option value="REJECTED">Rejected</option>
+          <option value="CANCELLED">Cancelled</option>
         </select>
-        <button class="btn btn-outline-primary btn-sm">Download</button>
+        <button class="btn btn-outline-primary btn-sm" (click)="exportToExcel()">
+          <i class="fas fa-download me-1"></i> Export
+        </button>
       </div>
     </div>
 
     <!-- Table -->
     <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
-      <table class="table table-bordered mb-0 align-middle text-center">
-        <thead class="bg-light">
+      <table class="table table-bordered mb-0 align-middle">
+        <thead class="bg-light sticky-top">
           <tr>
             <th>Employee</th>
-            <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
-            <th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
-            <th>11</th><th>12</th><th>13</th><th>14</th><th>15</th>
-            <th>16</th><th>17</th><th>18</th><th>19</th><th>20</th>
-            <th>21</th><th>22</th><th>23</th><th>24</th><th>25</th>
-            <th>26</th><th>27</th><th>28</th><th>29</th><th>30</th><th>31</th>
-            <th>Leave</th>
+            <th>Leave Type</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Total Days</th>
+            <th>Status</th>
+            <th>Applied Date</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let emp of [].constructor(30); let i=index">
+          <tr *ngFor="let leave of filteredLeaves" [class.table-warning]="leave.status === 'PENDING'"
+              [class.table-success]="leave.status === 'APPROVED'"
+              [class.table-danger]="leave.status === 'REJECTED'">
             <td class="text-start">
-              <img src="https://i.pravatar.cc/30?img={{i+1}}" class="rounded-circle me-2" width="30" height="30">
-              Employee {{ i + 1 }}
+              <img [src]="'https://i.pravatar.cc/30?img=' + (leave.employeeId || 1)" 
+                   class="rounded-circle me-2" width="30" height="30">
+              {{ leave.employeeName }}
             </td>
-            <ng-container *ngFor="let day of [].constructor(31)">
-              <td>
-                <i class="fas fa-check text-success"></i>
-              </td>
-            </ng-container>
-            <td>2</td>
+            <td>{{ leave.leaveTypeName }}</td>
+            <td>{{ leave.startDate | date: 'mediumDate' }}</td>
+            <td>{{ leave.endDate | date: 'mediumDate' }}</td>
+            <td class="text-center">{{ leave.totalDays }}</td>
+            <td>
+              <span [class]="getStatusBadgeClass(leave.status)">
+                {{ leave.status }}
+              </span>
+            </td>
+            <td>{{ leave.appliedDate | date: 'mediumDate' }}</td>
+            <td>
+              <div class="btn-group btn-group-sm">
+                <button class="btn btn-outline-info" (click)="viewLeaveDetails(leave)" 
+                        title="View Details">
+                  <i class="fas fa-eye"></i>
+                </button>
+                <button *ngIf="leave.status === 'PENDING'" class="btn btn-outline-success" 
+                        (click)="approveLeave(leave.id)" title="Approve">
+                  <i class="fas fa-check"></i>
+                </button>
+                <button *ngIf="leave.status === 'PENDING'" class="btn btn-outline-danger" 
+                        (click)="rejectLeave(leave.id)" title="Reject">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="filteredLeaves.length === 0">
+            <td colspan="8" class="text-center text-muted py-4">
+              No leave applications found
+            </td>
           </tr>
         </tbody>
       </table>
+    </div>
 
-      <!-- Pagination -->
-      <div class="d-flex justify-content-between align-items-center p-2 border-top">
-        <button class="btn btn-outline-primary btn-sm">Previous</button>
-        <span>Page 1 of 3</span>
-        <button class="btn btn-outline-primary btn-sm">Next</button>
+    <!-- Pagination -->
+    <div class="d-flex justify-content-between align-items-center p-2 border-top">
+      <button class="btn btn-outline-primary btn-sm" (click)="previousPage()" 
+              [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button class="btn btn-outline-primary btn-sm" (click)="nextPage()" 
+              [disabled]="currentPage === totalPages">Next</button>
+    </div>
+  </div>
+</div>
+
+<!-- Leave Details Modal -->
+<div class="modal fade" id="leaveDetailsModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Leave Application Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" *ngIf="selectedLeave">
+        <div class="row">
+          <div class="col-md-6">
+            <strong>Employee:</strong> {{ selectedLeave.employeeName }}<br>
+            <strong>Employee Code:</strong> {{ selectedLeave.employeeCode }}<br>
+            <strong>Department:</strong> {{ selectedLeave.departmentName }}<br>
+            <strong>Leave Type:</strong> {{ selectedLeave.leaveTypeName }} ({{ selectedLeave.leaveTypeCode }})<br>
+          </div>
+          <div class="col-md-6">
+            <strong>Status:</strong> <span [class]="getStatusBadgeClass(selectedLeave.status)">{{ selectedLeave.status }}</span><br>
+            <strong>Applied Date:</strong> {{ selectedLeave.appliedDate | date: 'medium' }}<br>
+            <strong>Contact:</strong> {{ selectedLeave.contactNumber || 'N/A' }}<br>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-6">
+            <strong>Start Date:</strong> {{ selectedLeave.startDate | date: 'mediumDate' }}<br>
+            <strong>End Date:</strong> {{ selectedLeave.endDate | date: 'mediumDate' }}<br>
+            <strong>Total Days:</strong> {{ selectedLeave.totalDays }}<br>
+          </div>
+          <div class="col-md-6">
+            <strong>Reason:</strong><br>
+            <p class="border p-2 rounded">{{ selectedLeave.reason || 'No reason provided' }}</p>
+          </div>
+        </div>
+        <div *ngIf="selectedLeave.remarks" class="mt-2">
+          <strong>Remarks:</strong><br>
+          <p class="border p-2 rounded bg-light">{{ selectedLeave.remarks }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -153,4 +297,10 @@
   font-weight: bold;
   font-size: 0.85rem;
 }
+
+/* Status badges */
+.badge-pending { background-color: #ffc107; color: #000; }
+.badge-approved { background-color: #28a745; color: #fff; }
+.badge-rejected { background-color: #dc3545; color: #fff; }
+.badge-cancelled { background-color: #6c757d; color: #fff; }
 </style>

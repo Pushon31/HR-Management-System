@@ -28,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AdminDashHomeComponent } from './components/admin-dash-home/admin-dash-home.component';
 import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
 import { UserManagementComponent } from './components/user-management/user-management.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { UserManagementComponent } from './components/user-management/user-manag
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    CommonModule
   ],
   providers: [
      {
